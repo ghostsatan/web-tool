@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>权限管理</title>
+    <link rel="stylesheet" type="text/css" href="css/style.css">
+    <!--layui的css-->
+    <link href="./css/layui.css" rel="stylesheet" />
+</head>
+<body>
+    <div class="center">
+    <div class="ty-transfer mt20 ml20" id="ued-transfer-1">
+        <div class="fl ty-transfer-list transfer-list-left">
+            <div class="ty-transfer-list-head">
+                未授权角色列表
+            </div>
+            <div class="ty-transfer-list-body">
+                <ul class="ty-tree-select" id="roleList">
+                </ul>
+            </div>
+            <div class="ty-transfer-list-foot">
+                <div class="ty-tree-div">
+                    <div class="tyc-check-blue fl">
+                        <input type="checkbox" class="transfer-all-check" id="tyc-check-blue">
+                        <span>
+                        </span>
+                    </div>
+                    <div class="ty-tree-text">
+                        全选
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="fl ty-transfer-operation">
+            <span class="ty-transfer-btn-toright to-switch">
+            </span>
+            <span class="ty-transfer-btn-toleft to-switch">
+            </span>
+        </div>
+        <div class="fl ty-transfer-list transfer-list-right">
+            <div class="ty-transfer-list-head">
+                已授权角色列表
+            </div>
+            <div class="ty-transfer-list-body">
+                <ul class="ty-tree-select" id="permissionList">
+                </ul>
+            </div>
+            <div class="ty-transfer-list-foot">
+                <div class="ty-tree-div">
+                    <div class="tyc-check-blue fl">
+                        <input type="checkbox" class="transfer-all-check" id="tyc-check-blue">
+                        <span>
+                        </span>
+                    </div>
+                    <div class="ty-tree-text">
+                        全选
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="clearboth">
+        </div>
+
+        <form class="layui-form">
+            <div class="ty-transfer-list-head">
+                权限列表
+            </div>
+            <div id="xtree3" class="xtree_contianer"></div>
+
+        </form> 
+        <div class="btn">
+            <button class="button" id="submit">确定</button>
+            <button class="button button-grey">取消</button>
+        </div>       
+    </div>
+     </div>   
+
+    <script type="text/javascript" src="js/jquery.min.js"></script>
+    <script type="text/javascript" src="js/Transfer.js"></script>
+    <!--先引用layui的js-->
+    <script src="./js/layui/layui.js"></script>
+    <!--引用xtree-->
+    <script src="./js/layui-xtree/layui-xtree.js"></script>
+    <script type="text/javascript">
+        // 获取未授权角色列表jQuery.getJSON( url [, data ] [, success ] )
+        $.getJSON("./data/user.json", "", function (res) {
+            //each循环 使用$.each方法遍历返回的数据date
+            var data = res.data;
+            for (var i = 0; i < data.length; i++) {
+                var html = '';
+                html += '<li>' +
+                    '<div class="ty-tree-div">' +
+                    '<label class="tyue-checkbox-wrapper">' +
+                    '<span class="tyue-checkbox">' +
+                    '<input type="checkbox" class="tyue-checkbox-input" id="tyue-checkbox-blue" data-id = '+data[i].id+'>' +
+                    '<span class="tyue-checkbox-circle"></span>' +
+                    '</span>' +
+                    '<span class="tyue-checkbox-txt" title="' + data[i].Name + '">' +
+                    data[i].Name +
+                    '</span>' +
+                    '</label>' +
+                    '</div>' +
+                    '</li>';
+                $('#roleList').append(html);
+            }
+
+        });
+        // 获取已授权列表jQuery.getJSON( url [, data ] [, success ] )
+        $.getJSON("./data/unselect.json", "", function (res) {
+            //each循环 使用$.each方法遍历返回的数据date
+            var data = res.data;
+            for (var i = 0; i < data.length; i++) {
+                var html = '';
+                html += '<li>' +
+                    '<div class="ty-tree-div">' +
+                    '<label class="tyue-checkbox-wrapper">' +
+                    '<span class="tyue-checkbox">' +
+                    '<input type="checkbox" class="tyue-checkbox-input" id="tyue-checkbox-blue" data-id = '+data[i].id+'>' +
+                    '<span class="tyue-checkbox-circle"></span>' +
+                    '</span>' +
+                    '<span class="tyue-checkbox-txt" title="' + data[i].Name + '">' +
+                    data[i].Name +
+                    '</span>' +
+                    '</label>' +
+                    '</div>' +
+                    '</li>';
+                $('#permissionList').append(html);
+            }
+
+        });
+        $("#ued-transfer-1").transferItem();
+    </script>
+    <script type="text/javascript">
+        var json;
+        // 获取权限列表
+        $.getJSON("./data/permisson.json", "", function (res) {
+            //each循环 使用$.each方法遍历返回的数据date
+            json = res.data;
+        });
+
+        //layui 的 form 模块是必须的
+        layui.use(['form'], function () {
+            var form = layui.form;
+            var xtree3 = new layuiXtree({
+                elem: 'xtree3',
+                form: form,
+                data: json,
+                isopen: false, //加载完毕后的展开状态，默认值：true
+                ckall: true, //启用全选功能，默认值：false
+                ckallback: function () {
+                    console.log(123);
+                }, //全选框状态改变后执行的回调函数
+                icon: { //三种图标样式，更改几个都可以，用的是layui的图标
+                    open: "&#xe7a0;", //节点打开的图标
+                    close: "&#xe622;", //节点关闭的图标
+                    end: "&#xe621;" //末尾节点的图标
+                },
+                color: { //三种图标颜色，独立配色，更改几个都可以
+                    open: "#EE9A00", //节点图标打开的颜色
+                    close: "#EEC591", //节点图标关闭的颜色
+                    end: "#828282" //末级节点图标的颜色
+                },
+                click: function (data) { //节点选中状态改变事件监听，全选框有自己的监听事件
+                    console.log(data.elem.checked); //得到checkbox原始DOM对象
+                }
+            });
+        });
+        //确定按钮事件
+        $('#submit').on("click",function(){
+            var arr =[];
+            var userIds ='';//用户id
+            var authIds = '';//权限id
+            var permissonArr = [];
+            var req = {};//请求参数
+            //获取已授权角色id
+            $('#permissionList li input').each(function(index){
+               arr.push($(this).data('id'));
+            })
+            userIds = arr.join(',');
+            //获取权限id
+            $.each($('input:checkbox:checked'),function(){
+                permissonArr.push($(this).data('id'));
+            });
+            authIds = permissonArr.join(',');
+            req.roleId = '1001';
+            req.userIds = userIds;
+            req.authIds = authIds;
+            console.log(req);
+            // ajax请求
+        })
+    </script>
+</body>
+
+</html>

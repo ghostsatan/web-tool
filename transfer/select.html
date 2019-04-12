@@ -1,0 +1,124 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+  <style>
+    ul li {
+      list-style: none;
+    }
+
+    .hide {
+      display: none
+    }
+
+    .width150 {
+      width: 150px;
+    }
+
+    .width150 input[type="text"] {
+      width: 100%;
+      height: 32px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      padding-left: 12px;
+    }
+
+    .width150 ul {
+      width: 96%;
+      padding: 0 0 0 20px;
+      margin: 0;
+      border: 1px solid #ccc;
+    }
+
+    .width150 li {
+      padding: 5px;
+    }
+
+    
+  </style>
+</head>
+
+<body>
+  <form id="form">
+    <div class="width150">
+      可多选年份：<input type="text" id="yearInput" placeholder="请选择年份" readonly>
+      <ul id="yearId" class="hide">
+      </ul>
+    </div>
+  </form>
+</body>
+<script type="text/javascript" src="./jquery.min.js"></script>
+<script>
+  (function () {
+    var str = '';
+    var arr = {};
+    // 获取下拉框数据
+    $.getJSON("./data/unselect.json", "", function (res) {
+      arr = res.data
+      for (let x in arr) {
+        str +=
+          `<li><label><input type="checkbox" value="${arr[x].id}" data-name="${arr[x].Name}">${arr[x].Name}</label></li>`;
+          $('#yearId').html(str);
+        }
+      });
+   })();
+
+  $("#yearInput").click(function () {
+    $(this).attr('placeholder', '');
+    var name = '';
+    $('#yearId input').each(function () { //循环遍历checkbox
+      var check = $(this).is(':checked'); //判断是否选中
+      if (check) {
+        name += $(this).attr('data-name') + ',';
+        $(this).attr('name', "yearId");
+      } else {
+        $(this).attr('name', "");
+      }
+    });
+    $("#yearInput").val(name.slice(0, -1)); //去除最后的逗号
+  });
+  //输入框blur事件调用接口
+  $("#yearInput").blur(function(){
+    var req = [];
+    console.log('失去焦点');
+    $('#yearId input').each(function () { 
+      console.log(123);
+      var check = $(this).is(':checked'); 
+      if (check) {
+        req.push( $(this).attr('data-name'));
+        console.log(req);
+      }
+    });
+  });
+
+  $("#yearId").mouseover(function () {
+    if (!$("#yearId").hasClass('hover')) { //类hover在下面用来验证是否需要隐藏下拉，没有其他用途。
+      $("#yearId").addClass('hover');
+    }
+  }).mouseout(function () {
+    $("#yearId").removeClass('hover');
+  });
+
+  $(document).on('click', function () {
+    if (!$("#yearInput").is(":focus") && !$("#yearId").hasClass('hover')) { //如果没有选中输入框且下拉不在hover状态。
+      var name = '';
+      $('#yearId input').each(function () { //遍历checkbox
+        var check = $(this).is(':checked'); //判断是否选中
+        if (check) {
+          name += $(this).attr('data-name') + ',';
+          $(this).attr('name', "yearId");
+        } else {
+          $(this).attr('name', "");
+        }
+      });
+      $("#yearInput").val(name.slice(0, -1)); //去除最后的逗号
+      $("#yearId").addClass('hide');
+    } else {
+      $("#yearId").removeClass('hide');
+    }
+  });
+</script>
+
+</html>

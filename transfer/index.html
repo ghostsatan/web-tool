@@ -1,0 +1,119 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title></title>
+<link rel="stylesheet" type="text/css" href="style.css">
+
+</head>
+<body>
+
+<div class="ty-transfer mt20 ml20" id="ued-transfer-1">
+    <div class="fl ty-transfer-list transfer-list-left">
+        <div class="ty-transfer-list-head">
+            已授权角色列表
+        </div>
+        <div class="ty-transfer-list-body">
+            <ul class="ty-tree-select" id="roleList">           
+            </ul>
+        </div>
+        <div class="ty-transfer-list-foot">
+            <div class="ty-tree-div">
+                <div class="tyc-check-blue fl">
+                    <input type="checkbox" class="transfer-all-check" id="tyc-check-blue">
+                    <span>
+                    </span>
+                </div>
+                <div class="ty-tree-text">
+                    全选
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="fl ty-transfer-operation">
+        <span class="ty-transfer-btn-toright to-switch">
+        </span>
+        <span class="ty-transfer-btn-toleft to-switch">
+        </span>
+    </div>
+    <div class="fl ty-transfer-list transfer-list-right">
+        <div class="ty-transfer-list-head">
+            未授权角色列表
+        </div>
+        <div class="ty-transfer-list-body">
+            <ul class="ty-tree-select" id="permissionList">
+            </ul>
+        </div>
+        <div class="ty-transfer-list-foot">
+            <div class="ty-tree-div">
+                <div class="tyc-check-blue fl">
+                    <input type="checkbox" class="transfer-all-check" id="tyc-check-blue">
+                    <span>
+                    </span>
+                </div>
+                <div class="ty-tree-text">
+                    全选
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="clearboth">
+    </div>
+            
+</div>
+        
+
+<script type="text/javascript" src="jquery.min.js"></script>
+<script type="text/javascript" src="Transfer.js"></script>
+<script type="text/javascript">  
+    // 获取角色列表jQuery.getJSON( url [, data ] [, success ] )
+    $.getJSON("./data/user.json", "", function(res) {
+    //each循环 使用$.each方法遍历返回的数据date
+       var data = res.data;
+        for(var i = 0; i < data.length; i++) {
+            var html = '';
+            html += '<li>' +
+                    '<div class="ty-tree-div">' +
+                        '<label class="tyue-checkbox-wrapper">' +
+                            '<span class="tyue-checkbox">' +
+                                '<input type="checkbox" class="tyue-checkbox-input" id="tyue-checkbox-blue">' +
+                                '<span class="tyue-checkbox-circle"></span>' +
+                            '</span>' +
+                            '<span class="tyue-checkbox-txt" title="' + data[i].Name + '">' +
+                                data[i].Name +
+                            '</span>' +
+                        '</label>' +
+                    '</div>' +
+                '</li>';
+                $('#roleList').append(html);
+        }
+        
+});
+ // 获取权限列表jQuery.getJSON( url [, data ] [, success ] )
+ $.getJSON("./data/unselect.json", "", function(res) {
+    //each循环 使用$.each方法遍历返回的数据date
+       var data = res.data;
+        for(var i = 0; i < data.length; i++) {
+            var html = '';
+            html += '<li>' +
+                    '<div class="ty-tree-div">' +
+                        '<label class="tyue-checkbox-wrapper">' +
+                            '<span class="tyue-checkbox">' +
+                                '<input type="checkbox" class="tyue-checkbox-input" id="tyue-checkbox-blue">' +
+                                '<span class="tyue-checkbox-circle"></span>' +
+                            '</span>' +
+                            '<span class="tyue-checkbox-txt" title="' + data[i].Name + '">' +
+                                data[i].Name +
+                            '</span>' +
+                        '</label>' +
+                    '</div>' +
+                '</li>';
+                $('#permissionList').append(html);
+        }
+        
+});
+$("#ued-transfer-1").transferItem();
+</script>
+
+</body>
+</html>
