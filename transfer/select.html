@@ -1,49 +1,73 @@
 <!doctype html>
 <html lang="en">
-
 <head>
   <meta charset="UTF-8">
   <title>Document</title>
   <style>
-    ul li {
-      list-style: none;
+   ul li{
+     font-size: 14px;
+    list-style: none;
     }
-
-    .hide {
-      display: none
+   .hide{display: none}
+   .width150{
+    width: 150px;
     }
-
-    .width150 {
-      width: 150px;
+   .width150 input[type="text"]{
+     width: 100%; 
+     height: 32px; 
+     vertical-align: middle;
+     border: 1px solid #ccc; 
+     border-radius: 4px; 
+     padding-left: 12px;
+   }
+    .width150 ul{ 
+      width: 96%; 
+      padding: 0 0 0 20px; 
+      margin: 0; 
+      border: 1px solid #ccc; 
     }
-
-    .width150 input[type="text"] {
-      width: 100%;
-      height: 32px;
-      border: 1px solid #ccc;
-      border-radius: 4px;
-      padding-left: 12px;
+    .label{
+      font-size: 14px;
     }
-
-    .width150 ul {
-      width: 96%;
-      padding: 0 0 0 20px;
-      margin: 0;
-      border: 1px solid #ccc;
+    .width150 li{ 
+      padding: 5px; 
     }
-
-    .width150 li {
-      padding: 5px;
-    }
-
+    button{
+    display: inline-block;
+    outline: none;
+    cursor: pointer;
+    text-align: center;
+    text-decoration: none;
+    font: 12px/100% Arial, Helvetica, sans-serif;
+    padding: 5px 2px 4px;
+    text-shadow: 0 1px 1px rgba(0,0,0,.3);
+    -webkit-border-radius: 5px; 
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+    -webkit-box-shadow: 0 1px 2px rgba(0,0,0,.2);
+    -moz-box-shadow: 0 1px 2px rgba(0,0,0,.2);
+    box-shadow: 0 1px 2px rgba(0,0,0,.2);
+    color: #d9eef7;
+    border: solid 1px #0076a3;
+    background: #0095cd;
+    margin-bottom: 8px;
+    background: -webkit-gradient(linear, left top, left bottom, from(#0095cc), to(#00678e));
+    background: -moz-linear-gradient(top, #00adee, #00678e);
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#00adee', endColorstr='#00678e');
+}
+button:hover{
+    background: #007ead;
+    background: -webkit-gradient(linear, left top, left bottom, from(#00678e), to(#0095cc));
+    background: -moz-linear-gradient(top, #00678e, #0095cc);
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#00678e', endColorstr='#0095cc');
+}
     
   </style>
 </head>
-
-<body>
-  <form id="form">
+<body> 
+  <form id="form">  
     <div class="width150">
-      可多选年份：<input type="text" id="yearInput" placeholder="请选择年份" readonly>
+     <input type="text" id="yearInput" placeholder="请选择" readonly>
       <ul id="yearId" class="hide">
       </ul>
     </div>
@@ -54,58 +78,52 @@
   (function () {
     var str = '';
     var arr = {};
+    var btn = `<button id="submit">筛选</button> <button id="checkAll">全选</button> <button id = "cancel">取消</button>`
     // 获取下拉框数据
     $.getJSON("./data/unselect.json", "", function (res) {
       arr = res.data
       for (let x in arr) {
         str +=
-          `<li><label><input type="checkbox" value="${arr[x].id}" data-name="${arr[x].Name}">${arr[x].Name}</label></li>`;
+          `<li><label><input type="checkbox" value="${arr[x].id}" data-name="${arr[x].Name}" class = "checkItem">${arr[x].Name}</label></li>`;
           $('#yearId').html(str);
         }
+        $('#yearId').append(btn);
       });
    })();
-
-  $("#yearInput").click(function () {
-    $(this).attr('placeholder', '');
+  $('#checkAll').on('click',function(){
+    console.log(123333);
+  });
+  $("#yearInput").click(function(){
+    $(this).attr('placeholder','');
     var name = '';
-    $('#yearId input').each(function () { //循环遍历checkbox
-      var check = $(this).is(':checked'); //判断是否选中
-      if (check) {
-        name += $(this).attr('data-name') + ',';
-        $(this).attr('name', "yearId");
-      } else {
-        $(this).attr('name', "");
+    $('#yearId input').each(function () {//循环遍历checkbox
+      var check=$(this).is(':checked');//判断是否选中
+      if(check){
+        name += $(this).attr('data-name')+',';
+        $(this).attr('name',"yearId");
+      }else {
+        $(this).attr('name',"");
       }
     });
-    $("#yearInput").val(name.slice(0, -1)); //去除最后的逗号
-  });
-  //输入框blur事件调用接口
-  $("#yearInput").blur(function(){
-    var req = [];
-    console.log('失去焦点');
-    $('#yearId input').each(function () { 
-      console.log(123);
-      var check = $(this).is(':checked'); 
-      if (check) {
-        req.push( $(this).attr('data-name'));
-        console.log(req);
-      }
-    });
+    $("#yearInput").val(name.slice(0,-1));//去除最后的逗号
   });
 
-  $("#yearId").mouseover(function () {
-    if (!$("#yearId").hasClass('hover')) { //类hover在下面用来验证是否需要隐藏下拉，没有其他用途。
+  $("#yearId").mouseover(function() {
+    if (!$("#yearId").hasClass('hover')){//类hover在下面用来验证是否需要隐藏下拉，没有其他用途。
       $("#yearId").addClass('hover');
     }
-  }).mouseout(function () {
+  }).mouseout(function(){
     $("#yearId").removeClass('hover');
   });
 
-  $(document).on('click', function () {
-    if (!$("#yearInput").is(":focus") && !$("#yearId").hasClass('hover')) { //如果没有选中输入框且下拉不在hover状态。
+  $(document).on('click',function() {
+    console.log(123);
+    if (!$("#yearInput").is(":focus") && !$("#yearId").hasClass('hover')) {
+      console.log(08908908);
+      //如果没有选中输入框且下拉不在hover状态。
       var name = '';
-      $('#yearId input').each(function () { //遍历checkbox
-        var check = $(this).is(':checked'); //判断是否选中
+      $('#yearId input').each(function () {//遍历checkbox
+        var check = $(this).is(':checked');//判断是否选中
         if (check) {
           name += $(this).attr('data-name') + ',';
           $(this).attr('name', "yearId");
@@ -113,12 +131,12 @@
           $(this).attr('name', "");
         }
       });
-      $("#yearInput").val(name.slice(0, -1)); //去除最后的逗号
+      $("#yearInput").val(name.slice(0, -1));//去除最后的逗号
       $("#yearId").addClass('hide');
     } else {
       $("#yearId").removeClass('hide');
     }
   });
-</script>
 
+</script>
 </html>

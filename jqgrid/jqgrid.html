@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+  <!-- 引入JQ -->
+  <script src="https://cdn.bootcss.com/jquery/3.4.0/jquery.js"></script>
+  <!-- jqGrid插件的多语言包-非必要 -->
+  <script type="text/javascript" src="./js/jquery.jqGrid.js"></script>
+  <script type="text/javascript" src="./js/i18n/grid.locale-cn.js"></script>
+  <!-- multiple-select核心文件跟css -->
+  <script type="text/javascript" src="./js/multiple-select.js"></script>
+  <script rel="stylesheet" src="./js/multiple-select.css"></script>
+
+  <!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+  <!-- 最新版本的 Bootstrap 核心 CSS 文件 -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+ 
+  <script>
+    $.jgrid.defaults.width = 780;
+    $.jgrid.defaults.responsive = true;
+    $.jgrid.defaults.styleUI = 'Bootstrap';
+  </script>
+ 
+
+  <meta charset="utf-8" />
+  <title>jqGrid条件筛选-多选</title>
+  <style>
+ 
+
+.ms-parent {
+    display: inline-block;
+    position: relative;
+    vertical-align: middle;
+}
+
+.ms-choice {
+    display: block;
+    width: 100%;
+    height: 26px;
+    padding: 0;
+    overflow: hidden;
+    cursor: pointer;
+    border: 1px solid #aaa;
+    text-align: left;
+    white-space: nowrap;
+    line-height: 26px;
+    color: #444;
+    text-decoration: none;
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+    border-radius: 4px;
+    background-color: #fff;
+}
+
+.ms-choice.disabled {
+    background-color: #f4f4f4;
+    background-image: none;
+    border: 1px solid #ddd;
+    cursor: default;
+}
+
+.ms-choice > span {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 20px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: block;
+    padding-left: 8px;
+}
+
+.ms-choice > span.placeholder {
+    color: #999;
+}
+
+.ms-choice > div {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 20px;
+    height: 25px;
+    background: url('multiple-select.png') left top no-repeat;
+}
+
+.ms-choice > div.open {
+    background: url('multiple-select.png') right top no-repeat;
+}
+
+.ms-drop {
+    width: 100%;
+    overflow: hidden;
+    display: none;
+    margin-top: -1px;
+    padding: 0;
+    position: absolute;
+    z-index: 1000;
+    background: #fff;
+    color: #000;
+    border: 1px solid #aaa;
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+    border-radius: 4px;
+}
+
+.ms-drop.bottom {
+    top: 100%;
+    -webkit-box-shadow: 0 4px 5px rgba(0, 0, 0, .15);
+    -moz-box-shadow: 0 4px 5px rgba(0, 0, 0, .15);
+    box-shadow: 0 4px 5px rgba(0, 0, 0, .15);
+}
+
+.ms-drop.top {
+    bottom: 100%;
+    -webkit-box-shadow: 0 -4px 5px rgba(0, 0, 0, .15);
+    -moz-box-shadow: 0 -4px 5px rgba(0, 0, 0, .15);
+    box-shadow: 0 -4px 5px rgba(0, 0, 0, .15);
+}
+
+.ms-search {
+    display: inline-block;
+    margin: 0;
+    min-height: 26px;
+    padding: 4px;
+    position: relative;
+    white-space: nowrap;
+    width: 100%;
+    z-index: 10000;
+}
+
+.ms-search input {
+    width: 100%;
+    height: auto !important;
+    min-height: 24px;
+    padding: 0 20px 0 5px;
+    margin: 0;
+    outline: 0;
+    font-family: sans-serif;
+    font-size: 1em;
+    border: 1px solid #aaa;
+    -webkit-border-radius: 0;
+    -moz-border-radius: 0;
+    border-radius: 0;
+    -webkit-box-shadow: none;
+    -moz-box-shadow: none;
+    box-shadow: none;
+    background: #fff url('multiple-select.png') no-repeat 100% -22px;
+    background: url('multiple-select.png') no-repeat 100% -22px, -webkit-gradient(linear, left bottom, left top, color-stop(0.85, white), color-stop(0.99, #eeeeee));
+    background: url('multiple-select.png') no-repeat 100% -22px, -webkit-linear-gradient(center bottom, white 85%, #eeeeee 99%);
+    background: url('multiple-select.png') no-repeat 100% -22px, -moz-linear-gradient(center bottom, white 85%, #eeeeee 99%);
+    background: url('multiple-select.png') no-repeat 100% -22px, -o-linear-gradient(bottom, white 85%, #eeeeee 99%);
+    background: url('multiple-select.png') no-repeat 100% -22px, -ms-linear-gradient(top, #ffffff 85%, #eeeeee 99%);
+    background: url('multiple-select.png') no-repeat 100% -22px, linear-gradient(top, #ffffff 85%, #eeeeee 99%);
+}
+
+.ms-search, .ms-search input {
+    -webkit-box-sizing: border-box;
+    -khtml-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    -ms-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+.ms-drop ul {
+    overflow: auto;
+    margin: 0;
+    padding: 5px 8px;
+}
+
+.ms-drop ul > li {
+    list-style: none;
+    display: list-item;
+    background-image: none;
+    position: static;
+}
+
+.ms-drop ul > li .disabled {
+    opacity: .35;
+    filter: Alpha(Opacity=35);
+}
+
+.ms-drop ul > li.multiple {
+    display: block;
+    float: left;
+}
+
+.ms-drop ul > li.group {
+    clear: both;
+}
+
+.ms-drop ul > li.multiple label {
+    width: 100%;
+    display: block;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.ms-drop ul > li label {
+    font-weight: normal;
+    display: block;
+    white-space: nowrap;
+}
+
+.ms-drop ul > li label.optgroup {
+    font-weight: bold;
+}
+
+.ms-drop input[type="checkbox"] {
+    vertical-align: middle;
+    margin: 5px;
+}
+
+.ms-drop .ms-no-results {
+    display: none;
+}
+.form-control{
+  width: 100px !important;
+  padding: 2px 3px !important;
+}
+</style>
+</head>
+
+<body>
+  <div style="margin-left:20px;">
+    <table id="jqGrid"></table>
+    <div id="jqGridPager"></div>
+  </div>
+  <script type="text/javascript">
+    $(document).ready(function () {
+    
+      $("#jqGrid").jqGrid({
+        url: './data/JSONData.json',
+        mtype: "GET",
+        datatype: "json",
+        page: 1,
+        colModel: [{
+            label: "Order ID",
+            //sorttype: 'integer',
+            name: 'OrderID',
+            key: true,
+            width: 75
+          },
+          {
+            label: "Customer ID",
+            name: 'CustomerID',
+            width: 150,
+            // 设置表格列可下拉
+            stype: "select",
+            multiple:true, 
+            
+            // 下拉的value
+            searchoptions: {
+              value: "ALFKI:ALFKI;ANATR:ANATR;ANTON:ANTON"
+            }
+          },
+          {
+            label: "Order Date",
+            name: 'OrderDate',
+            width: 150,
+            sorttype: 'date',
+            formatter: 'date',
+            srcformat: 'Y-m-d',
+            newformat: 'n/j/Y',
+            searchoptions: {
+              // dataInit is the client-side event that fires upon initializing the toolbar search field for a column
+              // use it to place a third party control to customize the toolbar
+             
+            }
+          },
+          {
+            label: "Ship Name",
+            name: 'ShipName',
+            width: 150,
+            searchoptions: {
+              // dataInit is the client-side event that fires upon initializing the toolbar search field for a column
+              // use it to place a third party control to customize the toolbar
+              sopt: ['cn']
+            }
+          },
+          {
+            label: "Freight",
+            sorttype: 'number',
+            name: 'Freight',
+            width: 150
+          },
+        ],
+        loadonce: true,
+        viewrecords: true,
+        width: 780,
+        height: 250,
+        rowNum: 10,
+        pager: "#jqGridPager"
+      });
+      // activate the toolbar searching
+      $('#jqGrid').jqGrid('filterToolbar');
+      $('#jqGrid').jqGrid('navGrid', "#jqGridPager", {
+        search: false, // show search button on the toolbar
+        add: false,
+        edit: false,
+        del: false,
+        refresh: true
+      });
+      //muli-select初始化  必须放在jqgrid初始化之后
+      $('#gs_CustomerID').multipleSelect();
+    });
+  </script>
+
+
+</body>
+
+</html>
