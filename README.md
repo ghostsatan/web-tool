@@ -8,4 +8,6 @@ transfer/select  ----基于jqury封装的 可多选的下拉select
 
 jqgrid    ----基于jqgrid  multi-select.js封装的  表格列可下来多选进行条件筛选    更改过jqgrid源码 要求jqgrid版本5.1.0  路径  
 
-引用没有很规范
+引用没有很规范   
+
+wave   ----基于css3  js 模仿360加速球的动态水波纹效果  水波纹比列可以根据后台参数动态调整
