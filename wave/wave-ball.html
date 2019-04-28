@@ -1,84 +1,93 @@
 <!doctype html>
 <html>
+
 <head>
-    <meta charset="utf-8" />
-    <title>加载球</title>
-    <style type="text/css">
-        .wave-wrapper {
-  border-radius: 100%;
-  width: 200px;
-  height: 200px;
-  overflow: hidden;
-  box-shadow: 0 0 0 5px white, 0 0 0 10px #00c2ff;
-  margin: 100px auto;
-  position: relative;
-}
-.progress-title {
-  position: absolute;
-  top: 50%;
-  left: 0;
-  width: 100%;
-  line-height: 100%;
-  font-size: 50px;
-  margin-top: -25px;
-  z-index: 10;
-  text-align: center;
-  display: table-cell;
-  font-family: arial;
-  vertical-align: middle;
-  transform-origin: center;
-}
-.wave {
-  width: 1000px;
-  height: 500px;
-  position: relative;
-  filter: contrast(80);
-  background: #ffffff;
-  overflow: hidden;
-  animation: wave-animation 4s infinite linear;
-}
-.wave::before,
-.wave::after {
-  content: " ";
-  position: absolute;
-  width: 250px;
-  height: 250px;
-  top: 50%;
-  margin-top: -125px;
-  border-radius: 100%;
-  filter: blur(50px);
-  background: #00c2ff;
-  box-shadow: 500px 0 0 #00c2ff, 0 120px 0 #00c2ff, 500px 120px 0 #00c2ff;
-}
-.wave::after {
-  left: 250px;
-}
-@keyframes wave-animation {
-  0% {
-    transform: translateX(-10%);
-  }
-  100% {
-    transform: translateX(-60%);
-  }
-}
+  <meta charset="utf-8" />
+  <title>加载球</title>
+  <style type="text/css">
+    .wave-wrapper {
+      border-radius: 100%;
+      width: 200px;
+      height: 200px;
+      overflow: hidden;
+      box-shadow: 0 0 0 5px white, 0 0 0 10px #00c2ff;
+      margin: 100px auto;
+      position: relative;
+    }
 
+    .progress-title {
+      position: absolute;
+      top: 50%;
+      left: 0;
+      width: 100%;
+      line-height: 100%;
+      font-size: 50px;
+      margin-top: -25px;
+      z-index: 10;
+      text-align: center;
+      display: table-cell;
+      font-family: arial;
+      vertical-align: middle;
+      transform-origin: center;
+    }
 
-    </style>
+    .wave {
+      width: 1000px;
+      height: 500px;
+      position: relative;
+      filter: contrast(80);
+      background: #ffffff;
+      overflow: hidden;
+      animation: wave-animation 4s infinite linear;
+    }
+
+    .wave::before,
+    .wave::after {
+      content: " ";
+      position: absolute;
+      width: 250px;
+      height: 250px;
+      top: 50%;
+      margin-top: -125px;
+      border-radius: 100%;
+      filter: blur(50px);
+      background: #00c2ff;
+      box-shadow: 500px 0 0 #00c2ff, 0 120px 0 #00c2ff, 500px 120px 0 #00c2ff;
+    }
+
+    .wave::after {
+      left: 250px;
+    }
+
+    @keyframes wave-animation {
+      0% {
+        transform: translateX(-10%);
+      }
+
+      100% {
+        transform: translateX(-60%);
+      }
+    }
+  </style>
 </head>
+
 <body>
-        <input type="range" min="0" max="100" value="30" step="1" id="progressbar" oninput="updateProgress(this)">
-        <div class="wave-wrapper">
-          <div class="progress-title">33%</div>
-          <div class="wave"></div>
-        </div>
-        <script>
-          function updateProgress(slider){
-  var value = slider.value;
-  var wave = document.querySelector(".wave");
-  // 1.23 = (-90 - 33) / 100
-  wave.style.top = (53+value*-1.23)+"%";
-  document.querySelector(".progress-title").innerHTML = value+"%";
-}
-        </script>
+  <input type="range" min="0" max="100" value="30" step="1" id="progressbar" oninput="updateProgress(this)">
+  <div class="wave-wrapper">
+    <span>设备平均使用率</span>
+    <div class="progress-title">33%</div>
+    <div class="wave"></div>
+  </div>
+  <script>
+   
+    function updateProgress(slider) {
+      var value = slider.value;
+      var wave = document.querySelector(".wave");
+      // 1.23 = (-90 - 33) / 100
+      wave.style.top = (53 + value * -1.23) + "%";
+      document.querySelector(".progress-title").innerHTML = value + "%";
+    }
+  </script>
 </body>
+
 </html>

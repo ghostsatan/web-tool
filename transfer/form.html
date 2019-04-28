@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+    <form id="form1">
+      <input type="text" value="1">
+      <input type="text" name="disabled" disabled="disabled" value="my_is_disabled">
+      <input type="text" name="username1" value="1">
+      <input type="text" name="username1" value="1">
+      <input type="text" name="username1" value="1">
+      <input type="text" name="username2" value="1">
+      <input type="text" name="password" value="1">
+      <input type="radio"  name="radio" value="1" checked="checked">
+      <input type="radio"  name="radio" value="0">
+      <input type="checkbox" name="checkbox_no_check" value="1">
+      <input type="checkbox" name="checkbox_check" checked="checked" value="1">
+      <select name="select_hasValue">
+        <option value="value1">text1</option>
+        <option value="value2">text2</option>
+      </select>
+      <select name="select_hasNotValue">
+        <option >text1</option>
+        <option >text2</option>
+      </select>
+      <input type="submit" value="提交"> 
+    </form>
+    <script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+    <script>
+    window.onload = function(){
+      var data1 = $("#form1").serializeArray();
+      console.log(data1);
+    }
+    
+    </script>
+</body>
+</html>

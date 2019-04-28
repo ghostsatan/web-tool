@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <title>step</title>
+  <style>
+    ul {
+      margin: 0;
+      padding: 0;
+    }
+
+    li {
+      list-style: none;
+    }
+
+    .pub-wrap {
+      position: relative;
+      padding: 0 30px 10px;
+      margin-top: 28px;
+      border-radius: 6px;
+
+    }
+
+
+    .pub-process {
+      position: relative;
+      height: 10px;
+      margin-top: 28px;
+      margin-left: 10px;
+      font-size: 0;
+      color: #fff;
+    }
+
+    .pub-process:after {
+      position: absolute;
+      top: 50%;
+      left: 0;
+      z-index: 1;
+      width: 99%;
+      height: 4px;
+      content: "";
+      -webkit-transform: translate(0, -50%);
+      transform: translate(0, -50%);
+      background-color: #d9d9d9;
+    }
+
+    .pub-process li {
+      position: relative;
+      z-index: 5;
+      display: inline-block;
+      width: 25%;
+      height: 35px;
+      font-size: .875rem;
+    }
+
+    .pub-process li:first-child {
+      width: 35px;
+      margin-left: -35px;
+    }
+
+    .pub-process .ball {
+      position: absolute;
+      top: 0;
+      right: 0;
+      z-index: 7;
+      width: 10px;
+      height: 10px;
+      line-height: 10px;
+      content: "";
+      text-align: center;
+      border-radius: 50%;
+      background-color: #d9d9d9;
+    }
+
+    .pub-process .active .ball {
+      background-color: #1890ff;
+    }
+
+    .pub-process .active+.active:after {
+      position: absolute;
+      top: 15%;
+      left: 0;
+      z-index: 6;
+      width: 100%;
+      height: 4px;
+      content: "";
+      -webkit-transform: translate(0, -50%);
+      transform: translate(0, -50%);
+      background-color: #1890ff;
+    }
+
+    .process-3 li {
+      width: 50%;
+    }
+
+    .process-5 li {
+      width: 25%;
+    }
+
+
+    /* flex ver */
+
+    .pub-process-flex {
+      display: -webkit-box;
+    }
+
+    .pub-process-flex li {
+      display: list-item;
+      -webkit-box-flex: 1;
+      width: auto;
+
+    }
+
+    .pub-process-flex li:first-child {
+      width: 35px;
+      margin-left: -35px;
+      -webkit-box-flex: 0;
+    }
+
+
+    .pub-process li {
+      color: #ccc;
+    }
+
+    .text {
+      position: absolute;
+      top: 30px;
+      right: -45px;
+      width: 100px;
+      text-align: center;
+    }
+
+    .active {
+      height: auto;
+      position: relative;
+      color: #000 !important;
+    }
+
+    .show>.text>span {
+      font-weight: bold;
+      font-size: 15px;
+    }
+
+    .detail {
+      width: 140px;
+      position: relative;
+      top: 10px;
+      right: -20px;
+      text-align: left;
+      color: #919191;
+      font-size: 14px;
+    }
+
+    .imgPoint {
+      width: 14px;
+      height: 14px;
+      position: relative;
+      top: 2px;
+    }
+
+    p {
+      margin-top: 5px;
+    }
+
+    .timeShow {
+      color: #1890FF;
+    }
+  </style>
+  <script src="./js/ajax.js"></script>
+  <script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+</head>
+
+<body>
+
+
+  <div class="pub-wrap">
+    <ul class="pub-process process-5 pub-process-flex" id="pubProcess">
+      <li class="active show">
+        <span class="ball"></span>
+        <div class="text">
+          <span>任务审核</span>
+          <div class="detail">
+            <div><span>曲丽丽</span> <img class="imgPoint" src="img/point.png" alt=""> </div>
+            <p>2017-10-01 12:00</p>
+          </div>
+        </div>
+
+      </li>
+      <li >
+        <span class="ball"></span>
+        <div class="text">
+          <span>备航准备</span>
+          <div class="detail detailShow">
+            <div><span>周毛毛</span> <img class="imgPoint" src="img/point-show.png" alt=""> </div>
+            <p class="timeShow">催一下</p>
+          </div>
+        </div>
+
+      </li>
+      <li >
+        <span class="ball"></span>
+        <div class="text">外业</div>
+      </li>
+      <li><span class="ball"></span>
+        <div class="text">内业</div>
+      </li>
+      <li><span class="ball"></span>
+        <div class="text">内业分析</div>
+      </li>
+      <li><span class="ball"></span>
+        <div class="text">归档</div>
+      </li>
+    </ul>
+  </div>
+  <script>
+    window.onload = function () {
+      new AjaxRequest({
+        type: "get",
+        url: "./step.json",
+        param: "",
+        isShowLoader: true,
+        dataType: "",
+        callBack: function (res) {
+          console.log(res.data.step);
+          document.querySelectorAll('ul#pubProcess > li').forEach((item, index) => {
+            let __your_step = res.data.step;
+            // console.log(__render_offset);
+            if (index <= __your_step ) {
+              console.log(index);
+              $(item).addClass('active show');
+            }
+          });
+          
+ 
+        }
+      });
+    }
+  </script>
+</body>
+
+</html>

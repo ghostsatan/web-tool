@@ -1,94 +1,56 @@
 {
-  "code": 200,
-  "message": "操作成功",
-  "data": [
-    {
-        "title": "系统管理", 
-        "id": "jd1",
-        "checked":true, 
-        "data": [
-            {
-                "title": "权限维护",
-                "checked":true,  
-                "id": "jd1.1", 
-                "data": [ ]
-            }, 
-            {
-                "title": "权限列表", 
-                "checked":true, 
-                "id": "jd1.2", 
-                "data": [ ]
-            }, 
-            {
-                "title": "业务日志",
-                "checked":true,  
-                "id": "jd1.3", 
-                "data": [ ]
-            }, 
-            {
-                "title": "角色授权",
-                "checked":true,  
-                "id": "jd1.4", 
-                "data": [ ]
-            }
-        ]
-    }, 
-    {
-        "title": "系统监控", 
-        "checked":true, 
-        "id": "jd2", 
-        "data": [
-            {
-                "title": "数据连接池", 
-                "checked":true, 
-                "id": "jd2.1", 
-                "data": [ ]
-            }, 
-            {
-                "title": "接口文档", 
-                "checked":true, 
-                "id": "jd2.2", 
-                "data": [ ]
-            }
-        ]
-    }, 
-    {
-        "title": "基础信息", 
-        "checked":true, 
-        "id": "jd2", 
-        "data": [
-            {
-                "title": "【方法分析】视图",
-                "checked":true, 
-                "id": "jd2.1", 
-                "data": [ ]
-            }, 
-            {
-                "title": "【仪器】视图", 
-                "checked":true, 
-                "id": "jd2.2", 
-                "data": [ ]
-            }
-        ]
-    }, 
-    {
-        "title": "方案管理", 
-        "checked":true, 
-        "id": "jd2", 
-        "data": [
-            {
-                "title": "质控方案编辑", 
-                "checked":true, 
-                "id": "jd2.1", 
-                "data": [ ]
-            }, 
-            {
-                "title": "质控方案删除",
-                "checked":true,  
-                "id": "jd2.2", 
-                "data": [ ]
-            }
-        ]
-    }
-]
-}
+    "code": 200,
+    "message": "操作成功",
+    "data": [{
+        "totalNum": "15",
+        "Name": "活性磷酸盐",
+        "leftNum": "20"
+      },
+      {
+        "totalNum": "15",
+        "Name": "活性磷酸盐",
+        "leftNum": "20"
+      },
+      {
+        "totalNum": "15",
+        "Name": "活性磷酸盐",
+        "leftNum": "20"
+      },
+      {
+        "totalNum": "15",
+        "Name": "活性磷酸盐",
+        "leftNum": "20"
+      },
+      {
+        "totalNum": "15",
+        "Name": "活性磷酸盐",
+        "leftNum": "20"
+      },
+      {
+        "totalNum": "15",
+        "Name": "活性磷酸盐",
+        "leftNum": "20"
+      },
+      {
+        "totalNum": "15",
+        "Name": "活性磷酸盐",
+        "leftNum": "20"
+      },
+      {
+        "totalNum": "15",
+        "Name": "活性磷酸盐",
+        "leftNum": "20"
+      },
+      {
+        "totalNum": "15",
+        "Name": "活性磷酸盐",
+        "leftNum": "20"
+      },
+      {
+        "totalNum": "15",
+        "Name": "活性磷酸盐",
+        "leftNum": "20"
+      }
+    ]
+  }
+  

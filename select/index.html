@@ -5,8 +5,56 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
   <script src="./js/jquery.min.js"></script>
-  <title>Document</title>
+  <title>下拉菜单+展开列表</title>
+  <style>
+    /*海湾监测物料样式开始*/
+    li {
+      list-style: none;
+    }
+
+    ul {
+      padding: 0;
+      margin: 0;
+    }
+
+    .list {
+      overflow: hidden;
+      font-size: 16px;
+    }
+
+    .item {
+      float: left;
+      margin: 10px 10px;
+    }
+
+    .item-val {
+      color: green;
+    }
+
+    .item-sum {
+      color: blue;
+    }
+
+    .list-title h5 {
+      display: inline-block;
+      margin-right: 5px;
+    }
+
+    .open {
+      -webkit-transform: rotate(180deg);
+      -ms-transform: rotate(180deg);
+      -o-transform: rotate(180deg);
+      transform: rotate(180deg);
+    }
+    .List{
+      width: 40%;
+    }
+    .open2 {
+      display: none;
+    }
+  </style>
   <script>
     /*
      * type              请求的方式  默认为get
@@ -79,24 +127,77 @@
 <body>
   <select id="select">
   </select>
+  <div class="List">
+    <div class="list-title">
+      <h5>这是一个列表</h5><i class="fa fa-chevron-down"></i>
+    </div>
+    <ul class="list">
+
+
+    </ul>
+  </div>
   <script>
+    var a = 0;
+    // 下拉菜单change事件
     new AjaxRequest({
-          type: "get",
-          url: "./data/unselect.json",
-          param: "",
-          isShowLoader: true,
-          dataType: "",
-          callBack: function (res) {
-            $("#select").prepend("<option value='0'>请选择</option>");
-            for (var i = 0; i < res.data.length; i++) {
-              $("#select").append("<option>" + res.data[i].Name + "</option>");
-            }
+      type: "get",
+      url: "./data/unselect.json",
+      param: "",
+      isShowLoader: true,
+      dataType: "",
+      callBack: function (res) {
+        $("#select").prepend("<option value='0'>请选择</option>");
+        for (var i = 0; i < res.data.length; i++) {
+          $("#select").append("<option>" + res.data[i].Name + "</option>");
+        }
+      }
+    });
+    $('#select').change(function () {
+      var checkValue = $("#select").val();
+      console.log(checkValue);
+    })
+    //折叠列表事件
+    $('.fa-chevron-down').click(function () {
+      if (a == 0){
+        
+        console.log('没有数据，所以要请求数据');
+        $(this).toggleClass('open');
+      new AjaxRequest({
+        type: "get",
+        url: "./data/permisson.json",
+        param: "",
+        isShowLoader: true,
+        dataType: "",
+        callBack: function (res) {
+          a = res.data.length;
+          console.log(a);
+          var data = res.data;
+          for (var i = 0; i < data.length; i++) {
+            var html = '';
+            html += '<li class="item">' + data[i].Name +
+              '(' +
+              '<span class="item-val">' +
+              data[i].leftNum +
+              '</span>' +
+              '/' +
+              '<span class="item-sum">' +
+              data[i].totalNum +
+              '</span>' +
+              ')' +
+              '</li>';
+            $('.list').append(html);
           }
-          }); 
-          $('#select').change(function () {
-          var checkValue = $("#select").val();
-          console.log(checkValue);
-        })
+        }
+      });
+      } else {
+        console.log(a);
+        console.log('已经有数据不需要请求');
+        $('.list').toggleClass('open2');
+        $(this).toggleClass('open');
+        
+      }
+      
+    })
   </script>
 </body>
 
