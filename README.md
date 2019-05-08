@@ -4,10 +4,10 @@ XtreeDemo  -----基于layui 封装的 多选框树形结构 用于权限管理
 
 role-manager  ----基于transfer  XtreeDemo的结合  用于质量管控项目的角色管理  
 
-transfer/select  ----基于jqury封装的 可多选的下拉select  
+transfer/select  ----基于jqury封装的 可多选的下拉select   2019年4月26日  select新增 折叠下拉列表功能
 
 jqgrid    ----基于jqgrid  multi-select.js封装的  表格列可下来多选进行条件筛选    更改过jqgrid源码 要求jqgrid版本5.1.0  路径  
 
-引用没有很规范   
+引用没有很规范  
 
-wave   ----基于css3  js 模仿360加速球的动态水波纹效果  水波纹比列可以根据后台参数动态调整
+wave   ----css实现仿360波动加速球效果

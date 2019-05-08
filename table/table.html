@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <title>Document</title>
+  <style>
+  .table thead th {
+    text-align: center;
+    vertical-align:middle !important;
+  }
+  .table td {
+    vertical-align: middle;
+    border-top: 1px solid #dee2e6;
+    text-align: center;
+  }
+  </style>
+</head>
+
+<body>
+  <div class="container-fluid" id="demo">
+    <div class="row h-100 justify-content-center pt-5">
+      <div class="card" style="width:88rem;height: 30rem">
+        <div class="card-body">
+          <table class="table table-sm table-striped">
+            <thead v-if="v_table_data.headData">
+              <tr id="thred">
+                <th scope="col" rowspan="2">固定表头1</th>
+                <th scope="col">固定表头2</th>
+                <th scope="col">固定表头3</th>
+                <th scope="col">固定表头4</th>
+                <th scope="col">固定表头5</th>
+              </tr>
+              <tr id="unit">
+                <td>我是单位</td>
+                <td>我是单位</td>
+                <td>我是单位</td>
+                <td>我是单位</td>
+                <!-- <td>我是动态单位</td>
+                <td>我是动态单位</td>
+                <td>我是动态单位</td> -->
+              </tr>
+
+            </thead>
+            <tbody id="tableData">
+              <!-- <tr v-for="row in v_table_data.bodyData.rows">
+                                <td v-for="val in row">{{val}}</td>
+                            </tr> -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- <table border="1" cellspacing="0" width="50%" height="150">
+    <caption>纵向合并单元格</caption>
+    <tr><th>班级</t> <th>姓名</th><th>年龄</th> <th>电话</th> </tr>
+    <tr><td rowspan="2">601班</td> <td>Jack</td> <td>24</td> <td>1351234567</td>  </tr>
+    <tr> <td>Tom</td> <td>22</td> <td>1351234567</td>  </tr>
+  
+    <tr><td  rowspan="3">602班</td> <td>Rose</td> <td>22</td> <td>1351234567</td>  </tr>
+    <tr> <td>张三</td> <td>25</td> <td>1351234567</td>  </tr>
+    <tr> <td>李四</td> <td>25</td> <td>1351234567</td>  </tr>
+</table>
+</body>
+</html> -->
+
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  <script src="../js/ajax.js"></script>
+  <script src="../js/jquery.min.js"> </script>
+  <script>
+    window.onload = function () {
+      new AjaxRequest({
+        type: "get",
+        url: "../data/table.json",
+        param: "",
+        isShowLoader: true,
+        dataType: "",
+        callBack: function (res) {
+          console.log(res.data);
+          console.log(res.data.headData.length);
+          for (let index = 0; index < res.data.headData.length; index++) {
+            if (!res.data.headData[index].unit) {
+              var html = '';
+              html += '<th scope="col" rowspan="2">' + res.data.headData[index].name +
+
+                '</th>';
+              
+            
+              $('#thred').last().append(html);
+             
+            } else {
+              var html = '';
+              var str = '';
+              str += '<td>' + res.data.headData[index].unit + ' </td>'
+              html += '<th scope="col">' + res.data.headData[index].name +
+
+                '</th>';
+              $('#thred').append(html);
+              $('#unit').last().append(str);
+            } 
+          }
+
+          for (let index = 0; index < res.data.bodyData.rows.length; index++) {
+            var rowhtml = '<tr>';
+         
+            
+
+            $.each(res.data.bodyData.rows[index],function(index,item){
+             
+              rowhtml += '<td scope="col">' + item +
+
+                '</td>';
+             
+            })
+            rowhtml += '</tr>'
+
+            $('#tableData').append(rowhtml);
+          }
+
+        }
+      });
+    }
+  </script>
+</body>
+
+</html>

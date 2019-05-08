@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <title>Document</title>
+</head>
+<body>
+    <div class="container-fluid" id="demo">
+        <div class="row h-100 justify-content-center pt-5">
+            <div class="card" style="width:55rem;height: 20rem">
+                <div class="card-body">
+                    <table class="table table-sm table-striped">
+                        <thead v-if="v_table_data.headData">
+                            <tr>
+                                <th scope="col" v-for="header in v_table_data.headData">
+                                    {{header.name}} - {{header.unit}}
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody v-if="v_table_data.bodyData">
+                            <tr v-for="row in v_table_data.bodyData.rows">
+                                <td v-for="val in row">{{val}}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script>
+        var app = new Vue({
+            el: '#demo',
+            data: {
+                v_table_data: {
+                    "baseData": {
+                        "taskInfoId": "任务ID",
+                        "taskName": "任务名称"
+                    },
+                    "headData": [
+                        {
+                            "name": "动态列名1",
+                            "unit": "单位",
+                            "mergeFlag": "是否合并"
+                        },
+                        {
+                            "name": "动态列名2",
+                            "unit": "单位",
+                            "mergeFlag": "是否合并"
+                        }
+                    ],
+                    "bodyData": {
+                        "current": 1,
+                        "rowCount": 10,
+                        "rows": [
+                            ["固定列1的值", "固定列2的值", "动态列1的值"],
+                            ["固定列1的值", "固定列2的值", "动态列1的值"]
+                        ],
+                        "total": 2
+                    }
+                }
+            }
+        })
+    </script>
+</body>
+
+</html>

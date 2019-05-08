@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+  <!-- <link rel="stylesheet" href="css/login.css"> -->
+  <title>Login</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background-image: url('./img/login_bg.jpg');
+      width: 100%;
+      height: 100%;
+    }
+
+    .section {
+      background: url(./img/login_main.png) no-repeat center top;
+      height: 800px;
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .login-title {
+      margin-top: -190px;
+      width: 100%;
+      height: 80px;
+    }
+
+    .title {
+      color: white;
+      margin-top: 10px
+    }
+
+    .all {
+      text-align: center;
+    }
+
+    .nav {
+      margin-left: auto;
+      width: 430px;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      margin-top: 80px;
+      display: flex;
+      border-bottom: 2px solid #ccc;
+      margin-right: auto;
+    }
+
+    .login {
+      position: relative;
+      margin: 0 20px;
+      color: #bba9a9;
+      border-bottom: 2px solid transparent;
+    }
+
+    .login.on {
+     border-bottom-color: currentColor;
+     color: #ffff;
+    }
+
+    .login.on::after {
+      display: inline-block;
+      content: '';
+      position: absolute;
+      left: 46%;
+      bottom: 0px;
+      border: .3em solid transparent;
+      border-bottom-color: currentColor;
+      transform: translateX(-50%);
+    }
+
+
+    .contentbox {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      margin-top: 30px;
+    }
+
+    input {
+      display: block;
+      width: 350px;
+      height: 46px;
+      border: 1px solid #c6cddc;
+    }
+
+    /*修改提示文字的颜色*/
+    input::-webkit-input-placeholder {
+      /* WebKit browsers */
+      color: #ffff;
+    }
+
+    .login-text{
+
+    }
+
+    .cont-1>input {
+
+      padding-left: 10px;
+      opacity: 0.4;
+      border-radius: 8px;
+      background-color: #6b6767;
+
+    }
+    .contentbox>div {    
+            display: none;   
+        }
+    .cont-1>input[name="psd"] {
+      margin-top: 17px;
+    }
+    .contentbox>div[class="box active"] {
+            display: block;
+        }
+    .btn {
+      width: 352px;
+      height: 50px;
+      border-width: 0px;
+      border-radius: 8px;
+      background-image: linear-gradient(383deg, #174EEF, #15C7F2);
+      cursor: pointer;
+      outline: none;
+      font-family: Microsoft YaHei;
+      color: white;
+      font-size: 17px;
+      margin-top: 17px;
+      font-weight: bold;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="section">
+    <div class="all">
+      <div class="login-title">
+        <img src='./img/login_title.png'>
+        <div class="title">全新LIMS实验室的人、机、法、料、环的全过程闭环管理</div>
+      </div>
+
+      <div class="nav">
+        <a class="login on"><img src='./img/btn_user.png' width="110px" height="100px">
+          <div class="login-text">用户名密码登陆</div>
+        </a>
+        <a class="login"><img src='./img/btn_jmg.png'>
+          <div class="login-text">加密狗登陆</div>
+        </a>
+
+      </div>
+      <div class="contentbox">
+        <div class="box active">
+          <div class="cont-1">
+            <input class="icon " name="txt" type="text" placeholder="用户名">
+            <input class="icon password" name="psd" type="password" placeholder="密码">
+            <button class="btn">登陆</button>
+          </div>
+        </div>
+        <div class="box">
+          <div class="cont-2">
+            <img src="img/img_jmgdl.png" height="172px">
+          </div>
+      </div>
+      </div>
+    </div>
+  </div>
+
+  </div>
+  <script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+  <script>
+    $().ready(function () {
+      $(function () {
+        $(".nav a").off("click").on("click", function () {
+          var index = $(this).index();
+          $(this).addClass("on").siblings().removeClass("on");
+          $(".contentbox .box").eq(index).addClass("active").siblings().removeClass("active");
+        });
+      });
+    })
+  </script>
+  <!--[if lte IE 9]>
+     <script src="https://cdn.bootcss.com/jquery-placeholder/2.3.1/jquery.placeholder.min.js"></script>
+     <script>
+        $(function(){
+            $('input[placeholder]').placeholder();
+            $('.password').css({"margin-top":"17px"})
+        });
+     </script>
+    <![endif]-->
+</body>
+
+</html>

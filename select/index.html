@@ -158,8 +158,8 @@
     })
     //折叠列表事件
     $('.fa-chevron-down').click(function () {
-      if (a == 0){
-        
+      
+      if (a == 0){ 
         console.log('没有数据，所以要请求数据');
         $(this).toggleClass('open');
       new AjaxRequest({

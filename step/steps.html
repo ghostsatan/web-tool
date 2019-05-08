@@ -214,28 +214,28 @@
     </ul>
   </div>
   <script>
-    window.onload = function () {
-      new AjaxRequest({
-        type: "get",
-        url: "./step.json",
-        param: "",
-        isShowLoader: true,
-        dataType: "",
-        callBack: function (res) {
-          console.log(res.data.step);
-          document.querySelectorAll('ul#pubProcess > li').forEach((item, index) => {
-            let __your_step = res.data.step;
-            // console.log(__render_offset);
-            if (index <= __your_step ) {
-              console.log(index);
-              $(item).addClass('active show');
-            }
-          });
+    // window.onload = function () {
+    //   new AjaxRequest({
+    //     type: "get",
+    //     url: "./step.json",
+    //     param: "",
+    //     isShowLoader: true,
+    //     dataType: "",
+    //     callBack: function (res) {
+    //       console.log(res.data.step);
+    //       document.querySelectorAll('ul#pubProcess > li').forEach((item, index) => {
+    //         let __your_step = res.data.step;
+    //         // console.log(__render_offset);
+    //         if (index <= __your_step ) {
+    //           console.log(index);
+    //           $(item).addClass('active show');
+    //         }
+    //       });
           
  
-        }
-      });
-    }
+    //     }
+    //   });
+    // }
   </script>
 </body>
 
