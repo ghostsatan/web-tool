@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <style>
+    .account {
+      position: relative;
+    }
+
+    .my-account {
+      position: absolute;
+      right: -33px;
+      top: 35px;
+    }
+  </style>
+</head>
+
+<body>
+  <li class="account"><a href="#" class="account1">我的账号</a>|
+    <div class="my-account">
+      这里是一些开始被隐藏鼠标经过就出现的文字
+    </div>
+
+  </li>
+  <script src="../js/jquery.min.js"></script>
+  <script>
+  var time=null;
+$(".my-account").hide();
+$(".account1").mouseover(function(){clearTimeout(time); $(".my-account").show(); });
+$(".account1").mouseout(function(){time=setTimeout(function(){$(".my-account").hide()},500);});
+$(".my-account").mouseover(function(){clearTimeout(time);$(".my-account").show();}); 
+$(".my-account").mouseout(function(){time=setTimeout(function(){$(".my-account").hide()},500);});
+</script>
+</body>
+
+</html>

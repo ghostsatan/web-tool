@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf" />
+  <meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
+  <title>批量反地址解析+商圈</title>
+  <style type="text/css">
+    body,
+    html {
+      width: 100%;
+      height: 100%;
+      margin: 0;
+      font-family: "微软雅黑";
+    }
+
+    #l-map {
+      height: 300px;
+      width: 100%;
+    }
+
+    #r-result {
+      width: 100%;
+      font-size: 14px;
+      line-height: 20px;
+    }
+  </style>
+  <script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=cHd8ylLLylTVVmBA0SvyVSUFdyG2QGc0"></script>
+  <script type="text/javascript" src="../js/jquery.min.js"></script>
+</head>
+
+<body>
+  <div id="l-map"></div>
+  <div id="r-result">
+    <input type="button" value="批量反地址解析+商圈" onclick="bdGEO(0)" />
+    <div id="result"></div>
+  </div>
+  <!-- 遮罩层 -->
+  <div id="cover"
+    style="background: #000; position: absolute; left: 0px; top: 0px; width: 100%; filter: alpha(opacity=30); opacity: 0.3; display: none; z-index: 2 ">
+
+  </div>
+  <!-- 弹窗 -->
+  <div id="showdiv"
+    style="width: 80%; margin: 0 auto; height: 9.5rem; border: 1px solid #999; display: none; position: absolute; top: 40%; left: 10%; z-index: 3; background: #fff">
+    <!-- 标题 -->
+    <div
+      style="background: #F8F7F7; width: 100%; height: 2rem; font-size: 0.65rem; line-height: 2rem; border: 1px solid #999; text-align: center;">
+      提示
+    </div>
+    <!-- 内容 -->
+    <div style="text-indent: 50px; height: 4rem; font-size: 0.5rem; padding: 0.5rem; line-height: 1rem; ">
+      js弹窗 js弹出DIV,并使整个页面背景变暗</div>
+    <!-- 按钮 -->
+    <div
+      style="background: #418BCA; width: 80%; margin: 0 auto; height: 1.5rem; line-height: 1.5rem; text-align: center;color: #fff;margin-top: 1rem; -moz-border-radius: .128rem; -webkit-border-radius: .128rem; border-radius: .128rem;font-size: .59733rem;"
+      onclick="closeWindow()">
+      确 定
+    </div>
+  </div>
+</body>
+
+</html>
+<script type="text/javascript">
+  // 百度地图API功能
+  var map = new BMap.Map("l-map");
+  map.centerAndZoom(new BMap.Point(116.328749, 40.026922), 13);
+  map.enableScrollWheelZoom(true);
+  var index = 0;
+  var myGeo = new BMap.Geocoder();
+  var adds = [
+    new BMap.Point(116.307852, 40.057031),
+    new BMap.Point(116.313082, 40.047674),
+    new BMap.Point(116.328749, 40.026922),
+    new BMap.Point(116.347571, 39.988698),
+    new BMap.Point(116.316163, 39.997753),
+    new BMap.Point(116.345867, 39.998333),
+    new BMap.Point(116.403472, 39.999411),
+    new BMap.Point(116.307901, 40.05901)
+  ];
+  for (var i = 0; i < adds.length; i++) {
+    var marker = new BMap.Marker(adds[i]);
+    map.addOverlay(marker);
+    addClickHandler(marker);
+    marker.setLabel(new BMap.Label("我是商圈:" + (i + 1), {
+      offset: new BMap.Size(20, -10)
+    }));
+  }
+
+  function addClickHandler(marker) {
+    marker.addEventListener("click", function (e) {
+      // window.alert(e);
+      // map.openInfoWindow();
+      showWindow();
+    });
+  }
+
+  function bdGEO() {
+    var pt = adds[index];
+    geocodeSearch(pt);
+    index++;
+  }
+  // 弹窗
+  function showWindow() {
+    $('#showdiv').show(); //显示弹窗
+    $('#cover').css('display', 'block'); //显示遮罩层
+    $('#cover').css('height', document.body.clientHeight + 'px'); //设置遮罩层的高度为当前页面高度
+  }
+  // 关闭弹窗
+  function closeWindow() {
+    $('#showdiv').hide(); //隐藏弹窗
+    $('#cover').css('display', 'none'); //显示遮罩层
+  }
+
+  function geocodeSearch(pt) {
+    if (index < adds.length - 1) {
+      setTimeout(window.bdGEO, 400);
+    }
+    myGeo.getLocation(pt, function (rs) {
+      var addComp = rs.addressComponents;
+      document.getElementById("result").innerHTML += index + ". " + adds[index - 1].lng + "," + adds[index - 1]
+        .lat + "：" + "商圈(" + rs.business + ")  结构化数据(" + addComp.province + ", " + addComp.city + ", " + addComp
+        .district + ", " + addComp.street + ", " + addComp.streetNumber + ")<br/><br/>";
+    });
+
+
+  }
+</script>
