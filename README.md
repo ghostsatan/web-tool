@@ -11,3 +11,5 @@ jqgrid    ----基于jqgrid  multi-select.js封装的  表格列可下来多选�
 引用没有很规范  
 
 wave   ----css实现仿360波动加速球效果
+
+menuTree   ----树结构的侧边导航栏
