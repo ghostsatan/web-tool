@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="box"></div>
+    <script>
+        function NumChange(opt) {
+            var dft = {
+                el: '#box',//className.index会默认为0
+                begin: 40,
+                end: 57,
+                speed: 30,
+            }
+            opt && typeof opt === 'object' ? (function () {
+                for (var i in dft) {
+                    !opt[i] ? opt[i] = dft[i] : ''
+                }
+            })() : opt = dft
+            opt.el = opt.el.indexOf('.') > -1 ? document.getElementsByClassName(opt.el.substring(1, opt.el.length))[0] : document.getElementById(opt.el.substring(1, opt.el.length))
+            this.reverse = opt.end - opt.begin > 0 ? 1 : 0;//判断增减
+            this.levelArr = [];//存储每位每次增加的数 Example:[1000,100,10,1]
+            this.rankArr = [];//存储每位数 Example:[4,8,5,3]
+            this.splitToArr = function () {
+                var differ = (opt.end - opt.begin) > 0 ? opt.end - opt.begin : opt.begin - opt.end;
+                var differL = differ.toString().length;
+                this.rankArr = differ.toString().split('').reverse();
+                for (var i = differL - 1; i > -1; i--) {
+                    var level = Math.pow(10, differL - i - 1);
+                    this.levelArr.push(level);
+                }
+            };
+            this.interval = function () {
+                this.splitToArr();
+                var o = {} || null;
+                o.reverse = this.reverse;
+                o.levelArr = this.levelArr;
+                o.rankArr = this.rankArr;
+                o.rankArrL = o.rankArr.length;
+                o.result = opt.begin;//初始值
+                o.timer = null;
+                o.index = 0;//每一位的索引值
+                o.circle = 0;//每一位数值加减次数
+                o.interval = function () {
+                    if (o.index == o.rankArrL) {
+                        clearInterval(o.timer)
+                        o.timer = null;
+                    } else {
+                        o.circle == o.rankArr[o.index] && o.rankArr[o.index] != 0 ? (function () {
+                            o.circle = 0;
+                            o.index++;
+                        })() : '';
+                        opt.el.innerHTML = o.result;
+                        o.rankArr[o.index] == 0 ? (function () {
+                            o.result += 0;
+                            o.index++;
+                        })() : (function () {
+                            o.reverse == 1 ? o.result += o.levelArr[o.index] : o.result -= o.levelArr[o.index];
+                            o.circle++;
+                        })()
+                    }
+                }
+                o.timer = setInterval(o.interval, opt.speed);
+            };
+            this.init = function () {
+                opt.end == opt.el.innerHTML ? '' : this.interval();
+            }
+            this.init();
+        }
+
+
+        //调用
+        setTimeout(() => {
+            new NumChange({
+                el: '#box',//放置数值的element
+                begin: 346,//初始数值
+                end: 598,//最终数值
+                speed: 50//变化速度
+            })
+        }, 3000);
+
+    </script>
+</body>
+
+</html>
