@@ -13,3 +13,5 @@ jqgrid    ----基于jqgrid  multi-select.js封装的  表格列可下来多选�
 wave   ----css实现仿360波动加速球效果
 
 menuTree   ----树结构的侧边导航栏
+
+countUp  ------ 数字动态累加效果 目前仅支持整型
