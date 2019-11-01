@@ -15,3 +15,5 @@ wave   ----css实现仿360波动加速球效果
 menuTree   ----树结构的侧边导航栏
 
 countUp  ------ 数字动态累加效果 目前仅支持整型
+
+digitroll  ----数字动态累加 + echart点击事件
