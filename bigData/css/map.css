@@ -1,0 +1,36 @@
+
+.map {
+    width: 100%;
+    border: 1px solid #CCCCCC;
+    margin-bottom:3%;
+}
+
+#allmap {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    margin: 0;
+    font-family: "微软雅黑";
+}
+
+#map_canvas img {
+    max-width: none;
+}
+
+#pio_info {
+    margin-left: 5px;
+    font-size: 14px;
+}
+
+.anchorBL {
+    display: none;
+}
+.BMap_stdMpPan,
+.BMap_stdMpZoom,
+.anchorTR,
+.BMap_omBtnClosed,
+.BMap_omOutFrame,
+.BMap_omCtrl {
+    display: none;
+}
+ 

@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+  <title>Document</title>
+  <script src="js/jquery.min.js"></script>
+  <script src="js/bootstrap.min.js"></script>
+  <script src="js/main.js"></script>
+  <script src="js/echarts.js"></script>
+  <!-- 时间组件 -->
+  <script src="js/laydate.js"></script>
+  <!-- 时间格式处理 -->
+  <script src="js/moment.js"></script>
+  
+  <link rel="stylesheet" href="css/bootstrap.min.css" />
+  <link rel="stylesheet" href="css/index.css" />
+  <link rel="stylesheet" href="https://a.amap.com/jsapi_demos/static/demo-center/css/demo-center.css" />
+</head>
+
+<body>
+  <div class="bodyBg">
+    <!-- 头部 -->
+    <div class="header container-fluid">
+      <select class="headSelect col-2">
+        <option value="">XXX码头</option>
+        <option value="">一号码头</option>
+        <option value="">二号码头</option>
+      </select>
+      <img class="col-8" src="image/bg_title.png" alt="" />
+    </div>
+    <div class="row center">
+      <!-- 左侧 -->
+      <div class="lines lineOne">
+        <div class="vedioes row">
+          <div class="wrap">
+            <p class="title">周边环境监控</p>
+            <img class="player" src="image/img1.jpg" alt="" />
+          </div>
+          <div class="wrap">
+            <p class="title">皮带监控</p>
+            <img class="player" src="image/img2.jpg" alt="" />
+          </div>
+        </div>
+        <div class="vedio">
+          <p class="title wharfMonitor">码头监控</p>
+          <img class="player3" src="image/img3.jpg" alt="" />
+        </div>
+        <div class="situation">
+          <div class="sitTitle">
+            <p class="title">船舶情况</p>
+            <!-- <select class="selects col-4" name="" id="">
+                <option value="">2019-05-30</option>
+                <option value="">1</option>
+                <option value="">2</option>
+              </select> -->
+            <input type="text" class="selects col-4" placeholder="请选择日期" id="shipdateTime">
+
+          </div>
+          <div class="tables">
+            <table class="table table-striped">
+              <thead>
+                <tr>
+                  <th scope="col">船舶名称</th>
+                  <th scope="col">重量</th>
+                  <th scope="col">入港时间</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <th scope="row">XXXXXXXXXXXX船</th>
+                  <td>15.3T</td>
+                  <td>2019-5-30 &nbsp; 15:23:48</td>
+                </tr>
+                <tr>
+                  <th scope="row">XXXXXXXXXXXX船</th>
+                  <td>15.3T</td>
+                  <td>2019-5-30 &nbsp; 15:23:48</td>
+                </tr>
+                <tr>
+                  <th scope="row">XXXXXXXXXXXX船</th>
+                  <td>15.3T</td>
+                  <td>2019-5-30 &nbsp; 15:23:48</td>
+                </tr>
+                <tr>
+                  <th scope="row">XXXXXXXXXXXX船</th>
+                  <td>15.3T</td>
+                  <td>2019-5-30 &nbsp; 15:23:48</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+      <!-- 中间 -->
+      <div class="lines lineTwo">
+        <div class="maps">
+          <div id="container"></div>
+        </div>
+        <div class="equipMonitor">
+          <p class="title  unusual">设备异常状态监控</p>
+          <ul class="circles">
+            <li class="cir">
+              <img src="image/bg_green.png" alt="" />
+              <span>输料正常</span>
+            </li>
+            <li class="cir">
+              <img src="image/bg_green.png" alt="" />
+              <span>计量正常</span>
+            </li>
+            <li class="cir">
+              <img src="image/bg_red.png" alt="" />
+              <span>通讯异常</span>
+            </li>
+            <li class="cir">
+              <img src="image/bg_green.png" alt="" />
+              <span>外壳开启</span>
+            </li>
+            <li class="cir">
+              <img src="image/bg_green.png" alt="" />
+              <span>调整参数状态</span>
+            </li>
+            <li class="cir">
+              <img src="image/bg_red.png" alt="" />
+              <span>供电异常</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <!-- 右侧 -->
+      <div class="lines lineThree">
+        <div class="productData">
+          <p class="tip">产量数据</p>
+          <ul class="product">
+            <li>
+              <div class="productNumber">63,587</div>
+              <div class="productText">本日产量</div>
+            </li>
+            <li>
+              <div class="productNumber">43,587</div>
+              <div class="productText">本周产量</div>
+            </li>
+            <li>
+              <div class="productNumber">53,587</div>
+              <div class="productText">本月产量</div>
+            </li>
+          </ul>
+        </div>
+        <div class="loading-quantity">
+          <p class="tip">船舶装载数量统计</p>
+          <ul class="time-table">
+            <li class="tabs show">本周</li>
+            <li class="tabs">本月</li>
+            <li class="tabs">本年</li>
+            <li class="calendar">
+              <!-- <span>2019-04-01~2019-10-01</span>
+              <img class="time-date" src="image/ic_date.png" alt="" /> -->
+              <input type="text" class="time-date" id="test">
+            </li>
+          </ul>
+          <div id="main" class="loadChart"></div>
+        </div>
+        <div class="output-comparison">
+          <p class="tip">各码头产量情况对比</p>
+          <div class="ech">
+            <div id="compire"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+<script src="https://webapi.amap.com/maps?v=1.4.14&key=您申请的key值"></script>
+<script>
+  var map = new AMap.Map("container", {
+    resizeEnable: true, //是否监控地图容器尺寸变化
+    zoom: 11, //初始化地图层级
+    center: [116.397428, 39.90923] //初始化地图中心点
+  });
+
+  //初始化船舶情况时间控件
+  laydate.render({
+    elem: '#shipdateTime',//指定元素
+    trigger: 'click', //采用click弹出
+    value: new Date(),
+    format: 'yyyy年MM月dd日'
+  });
+
+  var currentTime = moment().format("YYYY-MM-DD");//当前日期
+  var last7 = moment().subtract('days', 6).format('YYYY-MM-DD');//最近七天
+
+
+  laydate.render({
+    elem: '#test',//指定元素
+    trigger: 'click', //采用click弹出
+    range: true,
+    value: "" + last7 + " - " + currentTime + ""//默认显示本周时间
+
+  });
+
+  // 基于准备好的dom，初始化echarts实例
+  var myChart1 = echarts.init(document.getElementById("main"));
+  var myChart2 = echarts.init(document.getElementById("compire"));
+
+  //图表自适应
+  window.addEventListener("resize", function () {
+    myChart1.resize();
+    myChart2.resize();
+  });
+
+  // 指定图表的配置项和数据
+  var option1 = {
+    tooltip: {},
+    legend: {
+      data: ["销量"]
+    },
+    xAxis: {
+      axisLine: {
+        symbol: ["none"],
+        lineStyle: {
+          color: "#5584b5",
+          width: 1
+        }
+      },
+      axisLabel: {
+        show: true,
+        textStyle: {
+          color: "#ffffff", //更改坐标轴文字颜色
+          fontSize: 14 //更改坐标轴文字大小
+        }
+      },
+      data: ["5-20", "5-21", "5-22", "5-23", "5-24", "5-25", "5-27"]
+    },
+
+    yAxis: {
+      type: "value",
+
+      splitLine: {
+        show: true,
+        lineStyle: {
+          color: "#5584b5",
+          width: 1
+        }
+      },
+
+      axisLine: {
+        lineStyle: {
+          color: "none" //更改坐标轴颜色
+        }
+      },
+      axisLabel: {
+        show: true,
+        textStyle: {
+          color: "#ffffff", //更改坐标轴文字颜色
+          fontSize: 14 //更改坐标轴文字大小
+        }
+      }
+    },
+    series: [
+      {
+        symbol: "none", //这句就是去掉点的
+        type: "bar",
+        barWidth: 30, //柱图宽度
+        data: [250, 750, 1000, 1250, 900, 300, 100],
+        itemStyle: {
+          normal: {
+            color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
+              {
+                offset: 0,
+                color: "#00FE8C"
+              },
+              {
+                offset: 1,
+                color: "#08B961"
+              }
+            ])
+          }
+        }
+      }
+    ]
+  };
+
+  // 使用刚指定的配置项和数据显示图表。
+  myChart1.setOption(option1);
+
+  // 指定图表的配置项和数据
+  var option2 = {
+    tooltip: {},
+    legend: {
+      data: ["销量"]
+    },
+    xAxis: {
+      axisLine: {
+        symbol: ["none"],
+        lineStyle: {
+          color: "#5584b5",
+          width: 1
+        }
+      },
+      axisLabel: {
+        show: true,
+        textStyle: {
+          color: "#ffffff", //更改坐标轴文字颜色
+          fontSize: 14 //更改坐标轴文字大小
+        }
+      },
+      data: ["XX码头", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"]
+    },
+
+    yAxis: {
+      type: "value",
+
+      splitLine: {
+        show: true,
+        lineStyle: {
+          color: "#5584b5",
+          width: 1
+        }
+      },
+
+      axisLine: {
+        lineStyle: {
+          color: "none" //更改坐标轴颜色
+        }
+      },
+      axisLabel: {
+        show: true,
+        textStyle: {
+          color: "#ffffff", //更改坐标轴文字颜色
+          fontSize: 14 //更改坐标轴文字大小
+        }
+      }
+    },
+    series: [
+      {
+        symbol: "none", //这句就是去掉点的
+        type: "bar",
+        barWidth: 30, //柱图宽度
+        data: [250, 750, 1000, 1250, 900, 300, 100],
+        itemStyle: {
+          normal: {
+            color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
+              {
+                offset: 0,
+                color: "#FEBA00"
+              },
+              {
+                offset: 1,
+                color: "#DE8D08"
+              }
+            ])
+          }
+        }
+      }
+    ]
+  };
+
+  // 使用刚指定的配置项和数据显示图表。
+  myChart2.setOption(option2);
+</script>
+
+</html>
