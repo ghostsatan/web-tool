@@ -16,4 +16,6 @@ menuTree   ----树结构的侧边导航栏
 
 countUp  ------ 数字动态累加效果 目前仅支持整型
 
-digitroll  ----数字动态累加 + echart点击事件
+digitroll  ----数字动态累加 + echart点击事件   
+
+## bigData  -----大数据展示模板  包含echart  地图  监控视频（待更新）
