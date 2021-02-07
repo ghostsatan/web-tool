@@ -18,4 +18,6 @@ countUp  ------ 数字动态累加效果 目前仅支持整型
 
 digitroll  ----数字动态累加 + echart点击事件   
 
-## bigData  -----大数据展示模板  包含echart  地图  监控视频（待更新）
+## bigData  -----大数据展示模板  包含echart  地图  监控视频（待更新）     
+
+jq-admin  ---基于jq  bootstrap-addtab 的 后台管理系统侧边栏导航
