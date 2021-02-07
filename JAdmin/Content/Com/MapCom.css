@@ -1,0 +1,46 @@
+﻿.vhcenter {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.hcenter {
+    display: flex;
+    align-items: center;
+}
+
+.left50 {
+    height: 100%;
+    width: 50%;
+    float: left;
+}
+
+
+.fengexian {
+    width: 100%;
+    background: #ecebf3;
+    height: 10px;
+}
+
+
+
+.zhyspthbtn{
+	padding: 3px 8px;
+	border: 1px solid #01a2ff;
+	background: #01a2ff;
+	border-radius: 5px;
+	margin-left: 8px;
+	cursor: pointer;
+	user-select: none;
+}
+
+
+.QformError {
+	border: 2px solid #843534 !important;
+	box-shadow:0 0 10px #843534  !important;
+}
+
+.QformSucess {
+	border: 2px solid #3c763d !important;
+	box-shadow:0 0 10px #3c763d  !important;
+}

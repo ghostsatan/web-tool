@@ -1,0 +1,966 @@
+﻿html, body {
+    height: 100%;
+    width: 100%;
+}
+.rightMenu {
+  top: 32px !important;
+}
+
+.corner {
+    width: 0px;
+    height: 0px;
+    border: 8px solid #000;
+    border-bottom-color: transparent;
+    border-left-color: transparent;
+    border-right-color: transparent;
+    float: right;
+    margin-top: -12px;
+}
+
+/* 设置滚动条的样式 */
+::-webkit-scrollbar {
+    width: 5px !important;
+    height: 5px !important;
+}
+/* 滚动槽 */
+
+::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 6px #E6E6E6 !important;
+    background: #E6E6E6 !important;
+    border-radius: 5px !important;
+    width: 5px !important;
+    height: 5px !important;
+}
+/* 滚动条滑块 */
+
+::-webkit-scrollbar-thumb {
+    border-radius: 5px !important;
+    background: #058BE9 !important;
+    -webkit-box-shadow: inset 0 0 6px #E6E6E6 !important;
+    width: 5px !important;
+    height: 5px !important;
+}
+
+
+.popover {
+    max-width: none;
+    height: auto;
+}
+
+.popover-title {
+    font-size: 19px;
+    font-weight: bold;
+}
+/*系统中所用树的相关样式-ql-start*/
+.treediv {
+    padding: 0px 170px 0px 170px;
+}
+
+    .treediv:first-child > div {
+        text-align: right;
+        margin-bottom: 10px;
+    }
+
+.ztree * {
+    font-size: 18px;
+}
+
+ul#rMenu {
+    position: absolute;
+    visibility: hidden;
+    top: 0;
+    background-color: rgba(61, 61, 61, .0);
+    text-align: left;
+    padding: 2px;
+    -webkit-box-shadow: 3px 5px 5px rgba(61, 61, 61, .5);
+    -moz-box-shadow: 3px 5px rgba(61, 61, 61, .5);
+    box-shadow: 3px 5px 5px rgba(61, 61, 61, .5);
+}
+
+    ul#rMenu li {
+        padding: 10px;
+        cursor: pointer;
+        list-style: none outside none;
+        background-color: white;
+    }
+/*系统中所用树的相关样式-ql-end*/
+
+/*因button.css与树的样式冲突; 当需要用树形插件时，删除button.css，改用以下按钮样式-ql-start*/
+
+.combtn-lg { /*确定按钮-大*/
+    /*background-color: #058BE9;
+    width: 100px;
+    height: 35px;
+    border: 1px solid #0369b1;
+    color: #FFF;
+    font-size: 14px;
+    border-radius: 5px 5px !important;
+    margin-left: 0px;*/
+    height: 24px;
+    padding: 0px 20px;
+    color: #444;
+    background: #fafafa;
+    background-repeat: repeat-x;
+    border: 1px solid #bbb;
+    background: -webkit-linear-gradient(top,#ffffff 0,#eeeeee 100%);
+    background: -moz-linear-gradient(top,#ffffff 0,#eeeeee 100%);
+    background: -o-linear-gradient(top,#ffffff 0,#eeeeee 100%);
+    background: linear-gradient(to bottom,#ffffff 0,#eeeeee 100%);
+    background-repeat: repeat-x;
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=#ffffff,endColorstr=#eeeeee,GradientType=0);
+    -moz-border-radius: 5px 5px 5px 5px;
+    -webkit-border-radius: 5px 5px 5px 5px;
+    border-radius: 5px 5px 5px 5px;
+}
+
+    .combtn-lg:hover {
+        background: #eaf2ff;
+        /*background-color: #0a81d4;
+        width: 100px;
+        height: 35px;
+        border: 1px solid #034573;
+        color: #FFF;
+        font-size: 14px;
+        border-radius: 5px 5px !important;
+        margin-left: 0px;*/
+    }
+
+    .combtn-lg:active {
+        /*background-color: #056eb8;
+        width: 100px;
+        height: 35px;
+        border: 1px solid #034573;
+        color: #FFF;
+        font-size: 14px;
+        border-radius: 5px 5px !important;
+        margin-left: 0px;
+        box-shadow: rgba(3,98,166,0.6) 0px 0px inset;*/
+    }
+
+.combtn-big { /*确定按钮-中*/
+    background-color: #058BE9;
+    width: 80px;
+    height: 35px;
+    border: 1px solid #0369b1;
+    color: #FFF;
+    font-size: 14px;
+    border-radius: 5px 5px !important;
+    margin-left: 20px;
+}
+
+    .combtn-big:hover {
+        background-color: #0a81d4;
+        width: 80px;
+        height: 35px;
+        border: 1px solid #034573;
+        color: #FFF;
+        font-size: 14px;
+        border-radius: 5px 5px !important;
+        margin-left: 20px;
+    }
+
+    .combtn-big:active {
+        background-color: #056eb8;
+        width: 80px;
+        height: 35px;
+        border: 1px solid #034573;
+        color: #FFF;
+        font-size: 14px;
+        border-radius: 5px 5px !important;
+        margin-left: 20px;
+        box-shadow: rgba(3,98,166,0.6) 0px 0px inset;
+    }
+
+
+.combtn-small { /*确定按钮-小*/
+    font-size: 12px;
+    height: 24px;
+    padding: 0px 10px;
+    margin-left: 5px;
+    color: #444;
+    background: #fafafa;
+    background-repeat: repeat-x;
+    border: 1px solid #bbb;
+    background: -webkit-linear-gradient(top,#ffffff 0,#eeeeee 100%);
+    background: -moz-linear-gradient(top,#ffffff 0,#eeeeee 100%);
+    background: -o-linear-gradient(top,#ffffff 0,#eeeeee 100%);
+    background: linear-gradient(to bottom,#ffffff 0,#eeeeee 100%);
+    background-repeat: repeat-x;
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=#ffffff,endColorstr=#eeeeee,GradientType=0);
+    -moz-border-radius: 5px 5px 5px 5px;
+    -webkit-border-radius: 5px 5px 5px 5px;
+    border-radius: 5px 5px 5px 5px;
+    min-width: 70px;
+}
+
+    .combtn-small:hover {
+        background: #eaf2ff;
+        /*width: 78px;
+        height: 28px;
+        border: 1px solid #034573;
+        color: #FFF;
+        font-size: 15px;
+        border-radius: 5px 5px !important;
+        margin-left: 5px;*/
+    }
+
+/* .combtn-small:active {
+        background-color: #056eb8;
+        width: 78px;
+        height: 28px;
+        border: 1px solid #034573;
+        color: #FFF;
+        font-size: 16px;
+        border-radius: 5px 5px !important;
+        margin-left: 5px;
+        box-shadow: rgba(3,98,166,0.6) 0px 0px inset;
+    }*/
+
+.combtn-small50 { /*确定按钮-小宽度为百分之50*/
+    background-color: #058BE9;
+    /*width: 58px;*/
+    height: 27px;
+    border: 1px solid #0369b1;
+    color: #FFF;
+    font-size: 14px;
+    border-radius: 5px 5px !important;
+    margin-left: 5px;
+}
+
+    .combtn-small50:hover {
+        background-color: #0a81d4;
+        height: 27px;
+        border: 1px solid #034573;
+        color: #FFF;
+        font-size: 14px;
+        border-radius: 5px 5px !important;
+        margin-left: 5px;
+    }
+
+    .combtn-small50:active {
+        background-color: #056eb8;
+        height: 27px;
+        border: 1px solid #034573;
+        color: #FFF;
+        font-size: 14px;
+        border-radius: 5px 5px !important;
+        margin-left: 5px;
+        box-shadow: rgba(3,98,166,0.6) 0px 0px inset;
+    }
+
+.combtn-out-lg { /*退出按钮-大*/
+    background-color: red;
+    width: 100px;
+    height: 35px;
+    border: none;
+    color: #fff;
+    font-size: 14px;
+    border-radius: 5px 5px !important;
+    margin-left: 20px;
+}
+
+    .combtn-out-lg:hover {
+        background-color: red;
+        width: 100px;
+        height: 35px;
+        border: none;
+        color: #fff;
+        font-size: 14px;
+        border-radius: 5px 5px !important;
+        margin-left: 20px;
+    }
+
+    .combtn-out-lg:active {
+        background-color: red;
+        width: 100px;
+        height: 35px;
+        border: none;
+        color: #fff;
+        font-size: 14px;
+        border-radius: 5px 5px !important;
+        margin-left: 20px;
+    }
+
+.combtn-out-lg-or { /*退出按钮-大*/
+    background-color: orange;
+    width: 100px;
+    height: 35px;
+    border: none;
+    color: #fff;
+    font-size: 14px;
+    border-radius: 5px 5px !important;
+    margin-left: 20px;
+}
+
+    .combtn-out-lg-or:hover {
+        background-color: orange;
+        width: 100px;
+        height: 35px;
+        border: none;
+        color: #fff;
+        font-size: 14px;
+        border-radius: 5px 5px !important;
+        margin-left: 20px;
+    }
+
+    .combtn-out-lg-or:active {
+        background-color: orange;
+        width: 100px;
+        height: 35px;
+        border: none;
+        color: #fff;
+        font-size: 14px;
+        border-radius: 5px 5px !important;
+        margin-left: 20px;
+    }
+
+
+.combtn-cancel-lg { /*取消按钮-大*/
+    /*background-color: #f2f2f2;
+    width: 100px;
+    height: 35px;
+    border: 1px solid #cccccc;
+    color: #666666;
+    font-size: 14px;
+    border-radius: 5px 5px !important;
+    margin-left: 20px;*/
+    height: 24px;
+    padding: 0px 20px;
+    color: #444;
+    background: #fafafa;
+    background-repeat: repeat-x;
+    border: 1px solid #bbb;
+    background: -webkit-linear-gradient(top,#ffffff 0,#eeeeee 100%);
+    background: -moz-linear-gradient(top,#ffffff 0,#eeeeee 100%);
+    background: -o-linear-gradient(top,#ffffff 0,#eeeeee 100%);
+    background: linear-gradient(to bottom,#ffffff 0,#eeeeee 100%);
+    background-repeat: repeat-x;
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=#ffffff,endColorstr=#eeeeee,GradientType=0);
+    -moz-border-radius: 5px 5px 5px 5px;
+    -webkit-border-radius: 5px 5px 5px 5px;
+    border-radius: 5px 5px 5px 5px;
+}
+
+    .combtn-cancel-lg:hover {
+        background: #eaf2ff;
+        /*width: 100px;
+        height: 35px;
+        border: 1px solid #b3b3b3;
+        color: #666666;
+        font-size: 14px;
+        border-radius: 5px 5px !important;
+        margin-left: 20px;*/
+    }
+
+    .combtn-cancel-lg:active {
+        /*background-color: #e0e0e0;
+        width: 100px;
+        height: 35px;
+        border: 1px solid #b3b3b3;
+        color: #666666;
+        font-size: 14px;
+        border-radius: 5px 5px !important;
+        margin-left: 20px;*/
+        /*box-shadow: rgba(3,98,166,0.6) 10px 10px inset;*/
+    }
+
+.combtn-cancel-big { /*取消按钮-中*/
+    background-color: #f2f2f2;
+    width: 80px;
+    height: 35px;
+    border: 1px solid #cccccc;
+    color: #666666;
+    font-size: 14px;
+    border-radius: 5px 5px !important;
+    margin-left: 20px;
+}
+
+    .combtn-cancel-big:hover {
+        background-color: #ebebeb;
+        width: 80px;
+        height: 35px;
+        border: 1px solid #b3b3b3;
+        color: #666666;
+        font-size: 14px;
+        border-radius: 5px 5px !important;
+        margin-left: 20px;
+    }
+
+    .combtn-cancel-big:active {
+        background-color: #e0e0e0;
+        width: 80px;
+        height: 35px;
+        border: 1px solid #b3b3b3;
+        color: #666666;
+        font-size: 14px;
+        border-radius: 5px 5px !important;
+        margin-left: 20px;
+        /*box-shadow: rgba(3,98,166,0.6) 10px 10px inset;*/
+    }
+/*因button.css与树的样式冲突; 当需要用树形插件时，删除button.css，改用以下按钮样式-ql-end*/
+
+/*覆盖bootstraptable部分样式-ql-start*/
+.fixed-table-header > table > thead {
+    /*background-color: rgba(9,110,215,0.3) !important;*/
+    /*background: #eef3f5 !important;*/
+    /*background: url(/Img/bjtable.png) !important;
+    background-size: 100% 100% !important;*/
+}
+
+.bootstrap-table .table thead > tr > th {
+    text-align: center !important;
+    background: url(/Img/bjtable.png) !important;
+    background-size: 100% 100% !important;
+}
+
+.fixed-table-container thead th .th-inner, .fixed-table-container tbody td .th-inner {
+    height: 25px;
+    line-height: 25px;
+    padding: 0px;
+}
+
+.fixed-table-body > table tr:nth-child(even) {
+    background: #fafafa !important;
+}
+
+.fixed-table-body > table tr:nth-child(odd) {
+    background: #ffffff !important;
+}
+
+.fixed-table-body > table tr:hover {
+    background: rgba(0,255,255,0.3) !important;
+}
+
+.fixed-table-body > table tr.selected > td {
+    background: rgba(0,255,255,0.3) !important;
+}
+
+.fixed-table-header > table > thead > tr > th {
+    /*border: #058be9 !important;*/
+}
+
+.fixed-table-toolbar .bs-bars, .fixed-table-toolbar .search, .fixed-table-toolbar .columns {
+    margin-bottom: 3px !important;
+}
+
+.table td:not(:first-child) {
+    font-size: 12px !important;
+    padding: 0px !important;
+    text-align: left !important;
+    height: 25px;
+    line-height: 25px !important;
+    min-width: 50px;
+    padding-left: 6px !important;
+    padding-right: 6px !important;
+    white-space: nowrap !important;
+}
+
+.table th:not(:first-child) {
+    font-size: 12px !important;
+    padding: 0px !important;
+    text-align: left !important;
+    height: 25px;
+    line-height: 25px !important;
+    min-width: 50px;
+    white-space: nowrap !important;
+}
+
+.fixed-table-container tbody td:first-child {
+    min-width: 0px !important;
+}
+
+td.bs-checkbox {
+    min-width: 0px !important;
+    width: 5px !important;
+    padding: 0px 5px !important
+}
+
+td {
+    vertical-align: middle !important;
+}
+
+.fixed-table-container .bs-checkbox .th-inner {
+    padding: 0 !important;
+}
+
+.fixed-table-container thead th .th-inner {
+    margin-left: 2px !important;
+    margin-right: 2px !important;
+}
+
+.fixed-table-container thead th .th-inner, .fixed-table-container tbody td .th-inner {
+    font-weight: normal !important;
+}
+
+/*
+.fixed-table-body > table > tbody > tr > td {
+    border: none !important;
+}*/
+/*覆盖bootstraptable部分样式-ql-end*/
+/*图标弹出框的相关样式-ql-start*/
+ul.the-icons {
+    list-style: none;
+}
+
+    ul.the-icons > li {
+        cursor: pointer;
+    }
+
+        ul.the-icons > li:hover {
+            background-color: #eeeeee;
+        }
+/*图标弹出框的相关样式-ql-end*/
+/*遮罩框-ql-start*/
+.zhezhao {
+    position: absolute;
+    width: 100%;
+    top: 55%;
+    margin-top: -150px;
+    height: 300px;
+    text-align: center;
+    display: none;
+}
+/*遮罩框ql--end*/
+
+/*树形样式修改-ql-start*/
+.chk {
+    padding-right: 15px !important;
+    padding-bottom: 14px !important;
+    background-position-y: -4px !important;
+    margin-top: 1px !important;
+}
+/*树形样式修改-ql-end*/
+/*footer样式，因避免与前天框架类名冲突，故用自己名字命名-ql-start*/
+.ql_footer {
+    background-color: white;
+    height: 22px;
+    position: fixed;
+    bottom: 0px;
+    color: #808080;
+    text-align: center;
+    width: 100%;
+    border-top: 1px solid #cccccc;
+}
+/*footer样式，因避免与前天框架类名冲突，故用自己名字命名-ql-end*/
+
+/*汉字宋体*/
+.control-label, label, div, span, button {
+    font-family: 'Microsoft YaHei';
+    padding-left: 0px;
+    padding-right: 0px;
+}
+
+i {
+    font-family: none;
+}
+
+/*数字和英文新罗马*/
+.EnglishAndNumber {
+    font-family: Times New Roman;
+}
+/*必填红色星号*/
+.redstar:after {
+    content: ' *';
+    color: red;
+    font-size: 100%;
+}
+/*垂直水平居中*/
+.Absolute-Center {
+    height: 50%;
+    width: 50%;
+    margin: auto;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    padding: 10px;
+}
+
+.iframe_mar_top {
+    /*margin-top: 10px;*/
+}
+
+/*div内元素垂直居中*/
+
+.ql_ver {
+    position: relative;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.ql_ver2 {
+    position: relative;
+    top: 50%;
+    left: 50%;
+    transform: translateY(-50%) translateX(-50%);
+}
+
+.ql_ver3 {
+    position: relative;
+    top: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.vh_absolute {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translateY(-50%) translateX(-50%);
+}
+
+.ql_ver_absolute {
+    border: 1px solid #ddd;
+    width: 70%;
+    min-height: 90%;
+    padding: 10px;
+    padding-top: 30px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translateY(-50%) translateX(-50%);
+    /*margin-top:20px;*/
+}
+
+.floatleft {
+    float: left
+}
+
+.ql_auto {
+    border: 1px solid #ddd;
+    width: 70%;
+    min-height: 90%;
+    padding: 10px;
+    padding-top: 30px;
+    margin: 0 auto;
+    margin-top: 20px;
+}
+
+.ql_auto2 {
+    border: 1px solid #ddd;
+    height: 90%;
+    width: 70%;
+    margin: auto;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.Absolute-Center70 {
+    border: 1px solid #ddd;
+    height: 90%;
+    width: 70%;
+    margin: auto;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    padding: 10px;
+}
+
+.vhcenter {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.hcenter {
+    display: flex;
+    align-items: center;
+}
+
+.vcenter {
+    display: flex;
+    justify-content: center;
+}
+
+.length200 {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    /*max-width: 150px;*/
+    margin: 0 auto;
+}
+
+.length250 {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    /*max-width: 250px;*/
+    margin: 0 auto;
+}
+
+.length290 {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    /*max-width: 440px;*/
+    margin: 0 auto;
+}
+
+.length300 {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    /*max-width: 300px;*/
+    margin: 0 auto;
+}
+
+.textcenter {
+    text-align: center !important
+}
+
+.textleft {
+    text-align: left !important
+}
+
+.textright {
+    text-align: right !important
+}
+
+.textgreen {
+    color: green;
+}
+
+.textred {
+    color: red
+}
+
+.wh100 {
+    width: 100%;
+    height: 100%
+}
+
+.spanbtn {
+    padding: 2px 10px;
+    cursor: pointer;
+    user-select: none;
+}
+
+@-moz-keyframes qlshanshukuang {
+    0% {
+        box-shadow: 0 0 10px #00FFFF;
+    }
+
+    50% {
+        box-shadow: 0 0 20px #00FFFF;
+    }
+
+    100% {
+        box-shadow: 0 0 10px #00FFFF;
+    }
+}
+
+@-webkit-keyframes qlshanshukuang {
+    0% {
+        box-shadow: 0 0 10px #00FFFF;
+    }
+
+    50% {
+        box-shadow: 0 0 20px #00FFFF;
+    }
+
+    100% {
+        box-shadow: 0 0 10px #00FFFF;
+    }
+}
+
+.qlwindowshow {
+    animation-iteration-count: infinite;
+    animation-name: qlshanshukuang;
+    animation-duration: 3s;
+    border-radius: 5px;
+}
+
+
+/*遮罩---------------*/
+.loader {
+    position: relative;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    margin: 75px;
+    display: inline-block;
+    vertical-align: middle;
+}
+
+
+/*LOADER-7*/
+.loader-7 .line {
+    width: 8px;
+    position: absolute;
+    border-radius: 5px;
+    bottom: 0;
+    background: -webkit-gradient(linear, left top, left bottom, from(#1ee95d), to(#5714ce));
+    background: -webkit-linear-gradient(top, #1ee95d, #5714ce);
+    background: linear-gradient(to bottom, #1ee95d, #5714ce);
+}
+
+.loader-7 .line1 {
+    left: 0;
+    -webkit-animation: line-grow 0.5s ease alternate infinite;
+    animation: line-grow 0.5s ease alternate infinite;
+}
+
+.loader-7 .line2 {
+    left: 20px;
+    -webkit-animation: line-grow 0.5s 0.2s ease alternate infinite;
+    animation: line-grow 0.5s 0.2s ease alternate infinite;
+}
+
+.loader-7 .line3 {
+    left: 40px;
+    -webkit-animation: line-grow 0.5s 0.4s ease alternate infinite;
+    animation: line-grow 0.5s 0.4s ease alternate infinite;
+}
+
+
+@-webkit-keyframes line-grow {
+    0% {
+        height: 0;
+    }
+
+    100% {
+        height: 75%;
+    }
+}
+
+@keyframes line-grow {
+    0% {
+        height: 0;
+    }
+
+    100% {
+        height: 75%;
+    }
+}
+/*遮罩---------------*/
+
+.ComQuweyBrn {
+    text-align: center;
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    margin-bottom: 10px;
+}
+
+.nav-tabs > li.active > a, .nav-tabs > li.active > a:hover, .nav-tabs > li.active > a:focus {
+    font-weight: normal !important
+}
+
+.shenheshow {
+    display: none;
+}
+
+.panel-default > .panel-heading {
+    background-color: #f4f4f4 !important
+}
+
+.panel-heading {
+    /*background-color: #E0ECFF;
+    background: -webkit-linear-gradient(top,#EFF5FF 0,#E0ECFF 100%);
+    background: -moz-linear-gradient(top,#EFF5FF 0,#E0ECFF 100%);
+    background: -o-linear-gradient(top,#EFF5FF 0,#E0ECFF 100%);
+    background: linear-gradient(to bottom,#EFF5FF 0,#E0ECFF 100%);
+    background-repeat: repeat-x;*/
+    padding: 3px !important;
+}
+
+.btn {
+    font-size: 12px !important;
+}
+
+#panelheight {
+    margin-top: 11px !important;
+}
+
+.control-label {
+    font-size: 12px !important;
+}
+
+.form-control {
+    font-size: 12px !important;
+    height: 28px;
+    padding: 0px 6px 0px 6px !important;
+}
+
+span {
+    font-size: 12px !important;
+}
+
+button {
+    font-size: 12px !important;
+}
+
+a {
+    font-size: 12px !important;
+}
+
+.btn.dropdown-toggle.bs-placeholder.btn-default {
+    padding: 5px 12px !important;
+}
+
+.bootstrap-select.form-control {
+    padding: 0px !important;
+}
+
+td {
+    font-size: 12px !important;
+}
+
+p {
+    font-size: 12px !important;
+}
+
+
+.shoukuanbtn {
+    position: absolute;
+    right: 15px;
+    top: 0;
+    text-align: center;
+    user-select: none;
+    cursor: pointer;
+    font-size: 12px;
+    height: 27px;
+    line-height: 26px;
+    padding: 0px 10px;
+    margin-left: 5px;
+    color: #444;
+    background: #fafafa;
+    background-repeat: repeat-x;
+    border: 1px solid #bbb;
+    background: -webkit-linear-gradient(top,#ffffff 0,#eeeeee 100%);
+    background: -moz-linear-gradient(top,#ffffff 0,#eeeeee 100%);
+    background: -o-linear-gradient(top,#ffffff 0,#eeeeee 100%);
+    background: linear-gradient(to bottom,#ffffff 0,#eeeeee 100%);
+    background-repeat: repeat-x;
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=#ffffff,endColorstr=#eeeeee,GradientType=0);
+    -moz-border-radius: 5px 5px 5px 5px;
+    -webkit-border-radius: 5px 5px 5px 5px;
+    border-radius: 5px 5px 5px 5px;
+}
+
+    .shoukuanbtn:hover {
+        background: #eaf2ff;
+    }
+
+.control-label {
+    padding-top: 5px !important;
+}
+
+.btn-file, .fileinput-remove-button {
+    height: 28px !important;
+    display: inline-flex;
+}
+html, body, div, span, td, li, a, button, input, select, marquee {
+    -webkit-font-smoothing: antialiased !important;
+    -moz-osx-font-smoothing: grayscale !important
+}
